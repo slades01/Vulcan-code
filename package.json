@@ -1,0 +1,47 @@
+﻿{
+  "name": "vulcan-code",
+  "version": "1.0.0-fast",
+  "description": "Public opencode 1.0.0-fast configuration package: agents, commands, skills, plugins, tools, benchmarks, and specs for a high-autonomy, security-first opencode setup.",
+  "private": true,
+  "license": "MIT",
+  "author": "slades01",
+  "homepage": "https://github.com/slades01/Vulcan-code",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slades01/Vulcan-code.git",
+    "directory": "."
+  },
+  "bugs": {
+    "url": "https://github.com/slades01/Vulcan-code/issues"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-config",
+    "agents",
+    "skills",
+    "commands",
+    "plugins",
+    "automation",
+    "ai-coding",
+    "developer-tools"
+  ],
+  "opencode": {
+    "version": "1.0.0-fast"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit --pretty false",
+    "config:startup": "opencode debug startup",
+    "config:config": "opencode debug config",
+    "config:agent": "opencode debug agent",
+    "config:orchestrator": "opencode debug agent orchestrator",
+    "config:health": "opencode --version && opencode debug startup && opencode debug config && opencode debug agent orchestrator"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "1.17.9",
+    "@playwright/mcp": "0.0.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "typescript": "^5.8.2"
+  }
+}

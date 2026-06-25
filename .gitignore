@@ -1,0 +1,9 @@
+node_modules/
+bun.lock
+swarm/
+*.log
+.cache/
+# A real config may contain provider keys; only the example is committed.
+opencode.jsonc
+package-lock.json
+package-lock.json.*

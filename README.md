@@ -1,0 +1,84 @@
+# Vulcan-code
+
+A clean, **public** [opencode](https://opencode.ai) **1.0.0-fast** configuration package — a
+high-autonomy, security-first agent setup built around GLM + GPT model routing, bounded agent
+loops, parallel orchestration, and a deny-by-default permission posture.
+
+This repository contains the shareable subset of a live opencode setup: agents, commands,
+skills, plugins, tools, benchmarks, and specs — sanitized of all local paths, hostnames,
+private infrastructure, and secrets. Clone it, copy the pieces you want into your own
+`~/.config/opencode`, and adapt.
+
+> Built and tested against `opencode --version` → `1.0.0-fast`.
+
+## Download
+
+Grab the whole package as a single archive from this repo:
+
+- [`opencode-1.0.0-fast.zip`](./opencode-1.0.0-fast.zip) — sanitized snapshot of this release.
+
+Or clone:
+
+```bash
+git clone https://github.com/slades01/Vulcan-code.git
+```
+
+## What's included
+
+| Path | Contents |
+|---|---|
+| `agent/` | 33 agent definitions — orchestrator, build-lead, implementation/verification/optimization lanes, TDD engineer, debugger, research/synthesis/planning leads, panels, etc. |
+| `command/` | 26 slash commands — `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more. |
+| `skills/` | 8 skills — bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable). |
+| `plugins/` | `trusted-autonomy.ts` (deny-by-default autonomy plugin) and `swarm-compaction.ts`. |
+| `tools/` | `loop_guard.ts` and `pace_guard.ts` — bounded loop / wall-clock pace contracts. |
+| `bench/` | Benchmark tasks, scorecard, and a Rung-2 spec gate. See `bench/README.md`. |
+| `spec/` | Spec workflow docs. See `spec/README.md`. |
+| `config/opencode.example.jsonc` | A from-scratch, placeholder-only example config (no real keys). |
+| `examples/` | Quickstart and permissions walk-throughs. |
+
+## Install / use
+
+1. Install opencode (see opencode docs) and confirm `opencode --version` reports `1.0.0-fast`.
+2. Copy the pieces you want into your config directory (`~/.config/opencode` on macOS/Linux,
+   `%USERPROFILE%\.config\opencode` on Windows). You do not need all of it — start with
+   `agent/orchestrator.md` + a few commands/skills.
+3. Copy `config/opencode.example.jsonc` → `opencode.jsonc`, fill in your own provider keys via
+   environment variables (e.g. `{env:OPENAI_API_KEY}`). **Never** commit a real `opencode.jsonc`.
+4. (Optional, for plugin/tool type-checking) `npm install && npm run typecheck`.
+5. Smoke-test: `opencode debug startup && opencode debug config && opencode debug agent orchestrator`.
+
+See [`examples/quickstart.md`](./examples/quickstart.md) and
+[`examples/permissions.md`](./examples/permissions.md).
+
+## Security posture
+
+This package is **deny-by-default** for credential-like paths and destructive shell shapes.
+Agents ship permission frontmatter that denies reads of SSH keys, `.pem`/`.key`/`.p12` files,
+`.env*`, `.ssh`, `.aws`, `.azure`, `.kube`, browser profile data, and anything matching
+`*token*` / `*secret*` / `*credentials*`. The `trusted-autonomy` plugin hardens `ask` rules
+into `deny` for sensitive paths and blocks destructive commands per-segment. See
+[`SECURITY.md`](./SECURITY.md) and [`examples/permissions.md`](./examples/permissions.md).
+
+## What is deliberately NOT included
+
+To keep this package clean and safe, the following categories were excluded from the source
+setup: the raw key-bearing config, the usage/billing ledger, private laptop/host-access
+bundles, project and memory notes, session handoffs, local backup snapshots, the speed
+ledger, dependency install output, lockfiles, logs, and caches. No credentials, billing, or
+private host information are present.
+
+## Verification (this release)
+
+- Secret/private indicator scan across the payload (SSH key material, local absolute paths,
+  private LAN hosts, hostname/host-access tokens, provider key env names, the usage ledger
+  path, backup markers, and dependency directories) → **zero non-defensive hits**. The only
+  literal residual is `ed25519`, present solely inside defensive `"*id_ed25519*": deny`
+  permission rules and one deny-regex — a security feature that contains no key material
+  (see `SECURITY.md`).
+- Broader secret scan (`sk-…`, `AKIA…`, `ghp_…`, `Bearer …`, provider key assignments) → **0 hits**.
+- TypeScript: `tsc --noEmit` over `plugins/**` and `tools/**`.
+
+## License
+
+[MIT](./LICENSE) © slades01

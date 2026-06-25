@@ -1,0 +1,51 @@
+﻿// Vulcan-code — example opencode configuration (1.0.0-fast)
+//
+// This is a FROM-SCRATCH template with PLACEHOLDER values only. It intentionally
+// contains no real keys. Copy to `opencode.jsonc`, then set the referenced
+// environment variables in your shell. Never commit a real `opencode.jsonc`.
+//
+// `$schema` points at the public opencode config schema. Adjust model ids and
+// providers to match your opencode runtime version.
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Default model for the orchestrator / top-level agent.
+  "model": "openai/gpt-5.5-fast",
+  // Default model for small/low-stakes work (titles, summaries).
+  "small_model": "openai/gpt-5.4-mini",
+
+  // Providers. Keys are read from the environment; never inline secrets here.
+  "provider": {
+    "openai": {
+      "name": "OpenAI",
+      "options": { "apiKey": "{env:OPENAI_API_KEY}" }
+    },
+    "anthropic": {
+      "name": "Anthropic",
+      "options": { "apiKey": "{env:ANTHROPIC_API_KEY}" }
+    },
+    "zai-coding-plan": {
+      "name": "ZAI Coding Plan",
+      "options": { "apiKey": "{env:ZAI_API_TOKEN}" },
+      "models": {
+        "glm-5.2": { "name": "GLM 5.2" }
+      }
+    }
+  },
+
+  // Global permission baseline. The shipped agents add their own (stricter)
+  // frontmatter; `trusted-autonomy.ts` hardens any remaining `ask` into `deny`
+  // for sensitive paths. See SECURITY.md and examples/permissions.md.
+  "permission": {
+    "edit": { "*": "ask" },
+    "bash": { "*": "ask" }
+  },
+
+  // Optional MCP servers. Uncomment and configure as needed.
+  // "mcp": {
+  //   "playwright": {
+  //     "type": "local",
+  //     "command": ["npx", "@playwright/mcp@0.0.76"]
+  //   }
+  // }
+}

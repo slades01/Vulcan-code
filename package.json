@@ -1,7 +1,7 @@
 ﻿{
   "name": "vulcan-code",
   "version": "1.0.0-fast",
-  "description": "Public opencode 1.0.0-fast configuration package: agents, commands, skills, plugins, tools, benchmarks, and specs for a high-autonomy, security-first opencode setup.",
+  "description": "Public VulcanCode 1.0.0-fast agent configuration package: agents, commands, skills, plugins, tools, benchmarks, and specs for a high-autonomy, security-first coding-agent setup (built on the opencode runtime).",
   "private": true,
   "license": "MIT",
   "author": "slades01",
@@ -15,8 +15,10 @@
     "url": "https://github.com/slades01/Vulcan-code/issues"
   },
   "keywords": [
-    "opencode",
-    "opencode-config",
+    "vulcan",
+    "vulcancode",
+    "vulcan-code",
+    "opencode-compatible",
     "agents",
     "skills",
     "commands",
@@ -30,11 +32,11 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit --pretty false",
-    "config:startup": "opencode debug startup",
-    "config:config": "opencode debug config",
-    "config:agent": "opencode debug agent",
-    "config:orchestrator": "opencode debug agent orchestrator",
-    "config:health": "opencode --version && opencode debug startup && opencode debug config && opencode debug agent orchestrator"
+    "config:startup": "vulcan debug startup",
+    "config:config": "vulcan debug config",
+    "config:agent": "vulcan debug agent",
+    "config:orchestrator": "vulcan debug agent orchestrator",
+    "config:health": "vulcan --version && vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator"
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.17.9",

@@ -13,10 +13,11 @@ file path. You will receive an acknowledgment within a reasonable timeframe.
 
 ## What this package is
 
-Vulcan-code is a **configuration** package for [opencode](https://opencode.ai). It contains
-agent prompts, commands, skills, TypeScript plugins/tools, and example configs. It is
-sanitized: no credentials, API keys, SSH material, billing data, private hostnames, or local
-absolute paths are shipped (see the verification section of `README.md`).
+VulcanCode is a **configuration** package launched via the `vulcan` command (built on the
+[opencode](https://opencode.ai) runtime). It contains agent prompts, commands, skills,
+TypeScript plugins/tools, and example configs. It is sanitized: no credentials, API keys, SSH
+material, billing data, private hostnames, or local absolute paths are shipped (see the
+verification section of `README.md`).
 
 ## Built-in defenses
 
@@ -39,7 +40,7 @@ This package is intentionally **deny-by-default**:
 
 A literal scan for `ed25519` returns hits in this repo. **Every occurrence is a defensive
 deny-rule** — either `"*id_ed25519*": deny` in agent frontmatter or the `/id_ed25519/i`
-regex in `plugins/trusted-autonomy.ts`. These rules **prevent** opencode from reading SSH
+regex in `plugins/trusted-autonomy.ts`. These rules **prevent** VulcanCode from reading SSH
 private keys; they contain **no key material**. A pattern that denies `id_ed25519` files
 cannot match them without the literal substring, so this is an intentional, safe residual.
 

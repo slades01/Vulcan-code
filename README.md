@@ -1,21 +1,28 @@
-# Vulcan-code
+# VulcanCode
 
-A clean, **public** [opencode](https://opencode.ai) **1.0.0-fast** configuration package — a
-high-autonomy, security-first agent setup built around GLM + GPT model routing, bounded agent
-loops, parallel orchestration, and a deny-by-default permission posture.
+**VulcanCode** is a clean, **public** agent configuration package — a high-autonomy,
+security-first coding-agent setup built around GLM + GPT model routing, bounded agent loops,
+parallel orchestration, and a deny-by-default permission posture. You launch it with the
+`vulcan` command.
 
-This repository contains the shareable subset of a live opencode setup: agents, commands,
+This repository contains the shareable subset of a live VulcanCode setup: agents, commands,
 skills, plugins, tools, benchmarks, and specs — sanitized of all local paths, hostnames,
 private infrastructure, and secrets. Clone it, copy the pieces you want into your own
 `~/.config/opencode`, and adapt.
 
-> Built and tested against `opencode --version` → `1.0.0-fast`.
+> Built and tested against `vulcan --version` → `1.0.0-fast`.
+
+> **Compatibility note:** VulcanCode currently uses the [opencode](https://opencode.ai) config
+> schema (`https://opencode.ai/config.json`) and the `@opencode-ai/plugin` SDK under the hood,
+> so config files live in the standard opencode locations (`~/.config/opencode`, `.opencode/`)
+> and use the `opencode.jsonc` filename. `vulcan` is the branded launch command for the same
+> runtime.
 
 ## Download
 
 Grab the whole package as a single archive from this repo:
 
-- [`opencode-1.0.0-fast.zip`](./opencode-1.0.0-fast.zip) — sanitized snapshot of this release.
+- [`vulcan-1.0.0-fast.zip`](./vulcan-1.0.0-fast.zip) — sanitized snapshot of this release.
 
 Or clone:
 
@@ -39,14 +46,15 @@ git clone https://github.com/slades01/Vulcan-code.git
 
 ## Install / use
 
-1. Install opencode (see opencode docs) and confirm `opencode --version` reports `1.0.0-fast`.
+1. Install VulcanCode (the `vulcan` command; see the [opencode](https://opencode.ai) install
+   docs for the underlying runtime) and confirm `vulcan --version` reports `1.0.0-fast`.
 2. Copy the pieces you want into your config directory (`~/.config/opencode` on macOS/Linux,
    `%USERPROFILE%\.config\opencode` on Windows). You do not need all of it — start with
    `agent/orchestrator.md` + a few commands/skills.
 3. Copy `config/opencode.example.jsonc` → `opencode.jsonc`, fill in your own provider keys via
    environment variables (e.g. `{env:OPENAI_API_KEY}`). **Never** commit a real `opencode.jsonc`.
 4. (Optional, for plugin/tool type-checking) `npm install && npm run typecheck`.
-5. Smoke-test: `opencode debug startup && opencode debug config && opencode debug agent orchestrator`.
+5. Smoke-test: `vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator`.
 
 See [`examples/quickstart.md`](./examples/quickstart.md) and
 [`examples/permissions.md`](./examples/permissions.md).
@@ -78,6 +86,8 @@ private host information are present.
   (see `SECURITY.md`).
 - Broader secret scan (`sk-…`, `AKIA…`, `ghp_…`, `Bearer …`, provider key assignments) → **0 hits**.
 - TypeScript: `tsc --noEmit` over `plugins/**` and `tools/**`.
+- Config-health gate: `npm run config:health` (`vulcan --version && vulcan debug startup &&
+  vulcan debug config && vulcan debug agent orchestrator`).
 
 ## License
 

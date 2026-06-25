@@ -22,7 +22,7 @@ Never store secrets there. Only store plan names, reset dates, usage numbers, re
 - Red: low confirmed remaining capacity; run minimal/high-value tasks only.
 - Unknown: no trustworthy remaining quota. Do not treat as green.
 
-Local `opencode stats` is an activity proxy. It is not provider billing truth.
+Local `vulcan stats` is an activity proxy. It is not provider billing truth.
 
 ## Subscription Pools
 

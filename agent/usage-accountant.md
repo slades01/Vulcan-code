@@ -1,5 +1,5 @@
 ---
-description: Read-only usage accountant for monthly budget state, subscription usage ledger, local opencode stats, cost-class estimates, and swarm fan-out recommendations without reading credentials.
+description: Read-only usage accountant for monthly budget state, subscription usage ledger, local vulcan stats, cost-class estimates, and swarm fan-out recommendations without reading credentials.
 mode: subagent
 color: secondary
 steps: 45
@@ -50,10 +50,10 @@ permission:
   edit: deny
   bash:
     "*": ask
-    "opencode --version*": allow
-    "opencode stats*": allow
-    "opencode models*": allow
-    "opencode mcp list*": allow
+    "vulcan --version*": allow
+    "vulcan stats*": allow
+    "vulcan models*": allow
+    "vulcan mcp list*": allow
     "git clean*": deny
     "git reset --hard*": deny
     "rm *": deny
@@ -74,7 +74,7 @@ Inputs to use:
 
 - The non-secret subscription usage ledger at `~\.config\opencode\usage\subscriptions.jsonc`, when available.
 - User-provided monthly usage state or quota remaining for ChatGPT Pro, GLM Code/Z.AI Coding Plan, and OpenCode Go.
-- Local `opencode stats` as an activity proxy only.
+- Local `vulcan stats` as an activity proxy only.
 - Requested fan-out, depth, model mix, verification needs, and remote MCP use.
 
 Subscription rules:

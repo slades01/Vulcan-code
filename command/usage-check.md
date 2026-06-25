@@ -8,7 +8,7 @@ Check usage and swarm budget for:
 
 $ARGUMENTS
 
-Use the non-secret subscription ledger at `~\.config\opencode\usage\subscriptions.jsonc` and local opencode activity stats if helpful, but treat local stats as a proxy only. Do not access credentials, browser profiles, billing portals, API keys, token caches, SSH keys, or cloud secrets.
+Use the non-secret subscription ledger at `~\.config\opencode\usage\subscriptions.jsonc` and local vulcan activity stats if helpful, but treat local stats as a proxy only. Do not access credentials, browser profiles, billing portals, API keys, token caches, SSH keys, or cloud secrets.
 
 Return:
 

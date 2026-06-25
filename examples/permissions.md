@@ -44,5 +44,5 @@ blocking a destructive command hidden after a separator.
 
 The only blocked-pattern residual in this repo is the literal `ed25519`, and every
 occurrence is a `"*id_ed25519*": deny` rule or the `/id_ed25519/i` deny-regex — i.e. the
-rules that **stop** opencode reading your keys. They contain no key material; the literal is
+rules that **stop** VulcanCode reading your keys. They contain no key material; the literal is
 required to match the filename. See `SECURITY.md`.

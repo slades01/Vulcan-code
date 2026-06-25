@@ -20,6 +20,6 @@ Do not ask for approval before writing memory. Prefer updating an existing `AGEN
 Also update the nearest memory index when the memory should be recalled later:
 
 - Project: `.opencode/memory-index.md`.
-- Global opencode setup: `~\.config\opencode\memory-index.md`.
+- Global vulcan setup: `~\.config\opencode\memory-index.md`.
 
 Index format: `YYYY-MM-DD | topic | file | why it matters | tags`. Keep entries non-secret and compact.

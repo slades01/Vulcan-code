@@ -1,11 +1,12 @@
-﻿// Vulcan-code — example opencode configuration (1.0.0-fast)
+﻿// VulcanCode — example configuration (1.0.0-fast)
 //
 // This is a FROM-SCRATCH template with PLACEHOLDER values only. It intentionally
 // contains no real keys. Copy to `opencode.jsonc`, then set the referenced
 // environment variables in your shell. Never commit a real `opencode.jsonc`.
 //
-// `$schema` points at the public opencode config schema. Adjust model ids and
-// providers to match your opencode runtime version.
+// VulcanCode launches via the `vulcan` command but uses the public opencode config
+// schema under the hood. `$schema` points at that schema; adjust model ids and
+// providers to match your runtime version.
 {
   "$schema": "https://opencode.ai/config.json",
 

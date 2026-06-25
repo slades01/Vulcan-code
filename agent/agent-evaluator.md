@@ -51,9 +51,9 @@ permission:
   edit: deny
   bash:
     "*": ask
-    "opencode --version*": allow
-    "opencode agent list*": allow
-    "opencode debug agent*": allow
+    "vulcan --version*": allow
+    "vulcan agent list*": allow
+    "vulcan debug agent*": allow
     "git clean*": deny
     "git reset --hard*": deny
     "rm *": deny
@@ -81,7 +81,7 @@ Evaluation dimensions:
 
 Benchmark loop:
 
-- Use `~\.config\opencode\bench\` as the default benchmark root for opencode agent/command/skill changes.
+- Use `~\.config\opencode\bench\` as the default benchmark root for vulcan agent/command/skill changes.
 - Score proposed changes against `bench/tasks/*.md` when relevant and append summarized outcomes to `bench/scorecard.md`.
 - A change can be recommended for promotion only when it has a no-regression signal: pass/fail, wall-clock if measured, model used, verification tier, and residual risk.
 - If a benchmark is not runnable in the current environment, say why and mark the proposal `pending`, not `promoted`.
@@ -95,4 +95,4 @@ Return:
 - Minimal prompt/config changes to propose.
 - Verification plan for any proposed change.
 
-Never silently promote agent changes. Self-improvement edits must go through opencode-maintainer or the primary orchestrator, then benchmark/scorecard, config validation, and restart.
+Never silently promote agent changes. Self-improvement edits must go through vulcan-maintainer or the primary orchestrator, then benchmark/scorecard, config validation, and restart.

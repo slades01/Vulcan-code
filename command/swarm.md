@@ -33,6 +33,6 @@ Time budget:
 - Use `pace_guard` when available. T0/T1 verification is required for non-trivial diffs; T2/T3 only when budget remains or risk requires it.
 - At barriers, abandon unresolved speculative read-only lanes past 1.5x SLO to assumptions/risks rather than blocking the whole swarm.
 
-Use GLM 5.2 as the primary swarm/coding workhorse; reserve GPT-5.5-fast for top synthesis, security, opencode config changes, and high-stakes ambiguity.
+Use GLM 5.2 as the primary swarm/coding workhorse; reserve GPT-5.5-fast for top synthesis, security, vulcan config changes, and high-stakes ambiguity.
 
 Do not ask for approval or confirmation. Ask only for missing factual requirements that cannot be inferred safely.

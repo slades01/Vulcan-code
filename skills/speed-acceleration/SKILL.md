@@ -1,6 +1,6 @@
 ---
 name: speed-acceleration
-description: Use for EVERY non-trivial coding, orchestration, swarm, mission, loop, R&D, verification, or opencode setup task to minimize wall-clock time and continuously improve development speed.
+description: Use for EVERY non-trivial coding, orchestration, swarm, mission, loop, R&D, verification, or vulcan setup task to minimize wall-clock time and continuously improve development speed.
 ---
 
 # Speed Acceleration
@@ -45,7 +45,7 @@ During work, watch for these time smells:
 
 For non-trivial edits, T0+T1 is mandatory before final unless an environment blocker is documented.
 
-For opencode setup speed upgrades, `opencode debug startup` is only a shallow smoke. After any config, shim, agent frontmatter, command, skill, plugin, tool, or model-routing change, T1 must include `opencode debug config` and `opencode debug agent <changed-agent-or-orchestrator>`; use `npm run config:health` for the baseline orchestrator gate and `npm run config:agent -- <changed-agent>` for every edited non-orchestrator agent when available. Verify one file zone at a time and keep a `.bak` rollback for edited runtime-loaded files when the directory is not git-backed.
+For vulcan setup speed upgrades, `vulcan debug startup` is only a shallow smoke. After any config, shim, agent frontmatter, command, skill, plugin, tool, or model-routing change, T1 must include `vulcan debug config` and `vulcan debug agent <changed-agent-or-orchestrator>`; use `npm run config:health` for the baseline orchestrator gate and `npm run config:agent -- <changed-agent>` for every edited non-orchestrator agent when available. Verify one file zone at a time and keep a `.bak` rollback for edited runtime-loaded files when the directory is not git-backed.
 
 ## Speculative Acceleration
 
@@ -58,14 +58,14 @@ Use at most two speculative read-only lanes for Rung 2+ tasks:
 
 ## Self-Improvement Loop
 
-The orchestrator may continuously improve speed, not merely write a postmortem. Treat acceleration as an open-ended operating loop that can run during a mission, at verification barriers, and after any Rung 2+ mission, failed loop, slow swarm, opencode setup change, or repeated time smell.
+The orchestrator may continuously improve speed, not merely write a postmortem. Treat acceleration as an open-ended operating loop that can run during a mission, at verification barriers, and after any Rung 2+ mission, failed loop, slow swarm, vulcan setup change, or repeated time smell.
 
 Default loop:
 
 1. Detect the current bottleneck or missed acceleration opportunity.
 2. Classify it: serial-tooling, over-research, over-synthesis, slow verification, provider/model latency, environment, fan-out overhead, weak prompt/agent routing, missing helper tooling, noisy output, stale memory, or unknown.
 3. Form one or more acceleration hypotheses, each with an observable speed/quality signal.
-4. Act autonomously on the safest useful hypothesis when it is in scope and has a concrete reversibility signal: tracked diff, backup, generated-from-source file, one-command rollback, or a small text patch that can be reverted manually. Do not wait for user approval for low-risk speed improvements to opencode skills, commands, agents, prompts, runbooks, ledgers, verification routing, or helper scripts.
+4. Act autonomously on the safest useful hypothesis when it is in scope and has a concrete reversibility signal: tracked diff, backup, generated-from-source file, one-command rollback, or a small text patch that can be reverted manually. Do not wait for user approval for low-risk speed improvements to vulcan skills, commands, agents, prompts, runbooks, ledgers, verification routing, or helper scripts.
 5. Verify the improvement with the lightest meaningful signal: reduced tool calls, no truncation, faster T0/T1 path, fewer repair iterations, better lane parallelism, successful startup/skill parse, or a before/after benchmark when practical. For routing, model-selection, fan-out, or verification-ladder changes, include a quality-preserving signal such as T0/T1 still green, an equivalent focused check, or a benchmark that measures both speed and correctness.
 6. Promote, watch, backlog, or reject the change. If speed is still materially blocked and another safe hypothesis exists, continue with the next hypothesis within the mission pace budget, capped at 3 in-mission acceleration iterations unless an explicit loop/pace contract sets a tighter or broader bound.
 

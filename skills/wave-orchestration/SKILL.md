@@ -39,7 +39,7 @@ Track this for every max swarm:
 ## Model Routing
 
 - GLM 5.2: bulk discovery, cartography, spec shards, architecture shards, implementation, TDD, debugging, verification, review, performance, docs, memory.
-- GPT-5.5-fast: top orchestration, wave coordination, final synthesis, security, opencode config changes, agent evaluation, ambiguous failures, and high-stakes decisions.
+- GPT-5.5-fast: top orchestration, wave coordination, final synthesis, security, vulcan config changes, agent evaluation, ambiguous failures, and high-stakes decisions.
 - Mini-fast: title/summary only.
 - For high-confidence waves, reduce correlated blind spots by mixing role types and, where useful, model families: one workhorse lane can be paired with a stronger verifier/synthesis lane instead of more identical workers.
 

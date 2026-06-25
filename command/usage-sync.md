@@ -16,7 +16,7 @@ Use `subscription-usage-management` and the ledger at:
 Protocol:
 
 1. Do not ask for permission and do not read secrets, cookies, browser profiles, API keys, billing portals, or credential files.
-2. Read the non-secret ledger and local `opencode stats`.
+2. Read the non-secret ledger and local `vulcan stats`.
 3. If the user supplied non-secret remaining quota numbers in `$ARGUMENTS`, update the ledger.
 4. If exact remaining quota is unavailable, mark the affected pool unknown or stale; do not infer green from local cost or token proxy.
 5. Return per-subscription state, combined state, routing policy, max-swarm execution recommendation, and exact ledger fields that need non-secret updates.

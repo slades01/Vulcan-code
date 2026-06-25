@@ -9,7 +9,7 @@ $ARGUMENTS
 
 Contract:
 
-1. Do not write implementation diffs in the orchestrator context. Route code changes to `implementation-lane` (clear implementation), `tdd-engineer` (correctness/regression), or `optimization-lane` (performance/math). Rung 0 edits and opencode setup edits remain allowed.
+1. Do not write implementation diffs in the orchestrator context. Route code changes to `implementation-lane` (clear implementation), `tdd-engineer` (correctness/regression), or `optimization-lane` (performance/math). Rung 0 edits and vulcan setup edits remain allowed.
 1a. Use the `speed-acceleration` skill as the wall-clock operating doctrine.
 1b. Prime context before dispatch: relevant `AGENTS.md`, configured references, memory indexes, compact handoff docs, and speed-ledger lessons. Keep recall bounded and non-secret.
 2. Run graph-planner and R&D before build for unfamiliar, risky, cross-cutting, security, data-integrity, or performance/math work: `graph-planner`, `research-lead` + `system-architect`, plus `performance-engineer`/`algorithmic-mathematician` when optimization or numerics are in scope. Require a compact spec artifact before edit lanes touch Rung 2+ file zones.

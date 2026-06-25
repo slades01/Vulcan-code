@@ -43,7 +43,7 @@ Budget behavior:
 
 - Spend quota on useful independent exploration, adversarial review, benchmark variants, and verification confidence.
 - Do not waste quota on duplicate lanes or speculative loops.
-- Use GLM 5.2 for bulk discovery, architecture, debugging, implementation, verification, review, performance, docs, and memory; reserve GPT-5.5-fast for top synthesis, security, opencode config changes, agent evaluation, and hard ambiguity.
+- Use GLM 5.2 for bulk discovery, architecture, debugging, implementation, verification, review, performance, docs, and memory; reserve GPT-5.5-fast for top synthesis, security, vulcan config changes, agent evaluation, and hard ambiguity.
 - Maintain a next-wave backlog so max-autonomy can continue improving projects without starting a separate session.
 - After each max-swarm run, run a speed retro and update the speed ledger with reusable non-secret acceleration lessons.
 

@@ -1,4 +1,4 @@
-# opencode Agent Benchmark Harness
+# VulcanCode Agent Benchmark Harness
 
 Purpose: close the self-improvement loop for agent, command, skill, and routing changes.
 

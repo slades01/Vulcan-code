@@ -47,7 +47,6 @@ permission:
   edit:
     "*": deny
     "~/.config/opencode/usage/**": allow
-    "C:\\Users\\slade\\.config\\opencode\\usage\\**": allow
   bash:
     "*": deny
     "opencode --version*": allow

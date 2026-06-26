@@ -2,12 +2,34 @@
 
 ## 1. Prerequisites
 
-- The `vulcan` command installed; `vulcan --version` reports `1.0.0-fast`. See the
-  [opencode](https://opencode.ai) install docs for the underlying runtime.
-- Node.js + npm (only needed if you want to type-check the TypeScript plugins/tools).
+- Node.js + npm (needed to install and run the `vulcan` launcher, and to type-check
+  the TypeScript plugins/tools).
+- A supported OS/CPU: Windows, macOS, or Linux on x64/arm64 (inherited from the
+  `opencode-ai` runtime).
 - At least one provider API key exported in your environment.
 
-## 2. Copy the pieces you want
+## 2. Install the `vulcan` command
+
+```bash
+# from the GitHub repo (recommended for friends):
+npm install -g github:slades01/Vulcan-code
+
+# or from a local clone:
+npm install -g .
+```
+
+This installs the `vulcan` launcher plus the `opencode-ai` runtime as a
+dependency (no machine-specific paths). Confirm it works:
+
+```bash
+vulcan --version        # prints the opencode runtime version, e.g. 1.17.9
+```
+
+> Tip: point `vulcan` at a custom runtime build with
+> `VULCAN_RUNTIME=/path/to/opencode vulcan ...` (macOS/Linux), or on Windows
+> PowerShell: `$env:VULCAN_RUNTIME='C:\path\to\opencode.exe'; vulcan ...`.
+
+## 3. Copy the pieces you want
 
 VulcanCode is a la carte. A minimal start:
 
@@ -18,7 +40,7 @@ cp -r /path/to/Vulcan-code/command/loop.md command/
 cp -r /path/to/Vulcan-code/skills/bounded-agent-loops skills/
 ```
 
-## 3. Configure
+## 4. Configure
 
 ```bash
 cp /path/to/Vulcan-code/config/opencode.example.jsonc opencode.jsonc
@@ -27,14 +49,14 @@ cp /path/to/Vulcan-code/config/opencode.example.jsonc opencode.jsonc
 # set ZAI_API_TOKEN in your shell
 ```
 
-## 4. (Optional) type-check TypeScript
+## 5. (Optional) type-check TypeScript
 
 ```bash
 npm install
 npm run typecheck      # tsc --noEmit over plugins/** and tools/**
 ```
 
-## 5. Smoke test
+## 6. Smoke test
 
 ```bash
 vulcan debug startup

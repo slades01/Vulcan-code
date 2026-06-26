@@ -5,6 +5,26 @@ All notable changes to this package are documented here. The format is based on
 [Semantic Versioning](https://semver.org/) (with an `-fast` pre-release suffix tracking the
 opencode runtime).
 
+## [Unreleased]
+
+### Fixed
+- `vulcan` command now actually launches: the package declares a `bin` entry
+  (`"vulcan": "./bin/vulcan.js"`) and depends on the `opencode-ai` runtime
+  (`1.17.9`, matching `@opencode-ai/plugin`), so `npm install -g .` /
+  `npm install -g github:slades01/Vulcan-code` creates a working `vulcan` command
+  with no machine-specific absolute paths.
+
+### Added
+- `bin/vulcan.js` — portable CommonJS launcher (Node, shebang). Resolves the
+  installed `opencode-ai` runtime via `require.resolve` and spawns its `opencode`
+  bin, forwarding all args with inherited stdio and preserved exit status. Supports
+  a `VULCAN_RUNTIME` override and prints a concise reinstall hint on
+  resolve/ENOENT failures.
+
+### Changed
+- README and quickstart install instructions now use `npm install -g ...` and
+  `vulcan --version` (prints the bundled runtime version, e.g. `1.17.9`).
+
 ## [1.0.0-vulcan.0] - 2026-06-25
 
 ### Changed

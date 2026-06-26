@@ -10,7 +10,9 @@ skills, plugins, tools, benchmarks, and specs — sanitized of all local paths, 
 private infrastructure, and secrets. Clone it, copy the pieces you want into your own
 `~/.config/opencode`, and adapt.
 
-> Built and tested against `vulcan --version` → `1.0.0-fast`.
+> Built and tested as the `1.0.0-fast` release. `vulcan --version` delegates to
+> the bundled opencode runtime and prints the runtime version (currently
+> `1.17.9`).
 
 > **Compatibility note:** VulcanCode currently uses the [opencode](https://opencode.ai) config
 > schema (`https://opencode.ai/config.json`) and the `@opencode-ai/plugin` SDK under the hood,
@@ -51,15 +53,41 @@ git clone https://github.com/slades01/Vulcan-code.git
 
 ## Install / use
 
-1. Install VulcanCode (the `vulcan` command; see the [opencode](https://opencode.ai) install
-   docs for the underlying runtime) and confirm `vulcan --version` reports `1.0.0-fast`.
-2. Copy the pieces you want into your config directory (`~/.config/opencode` on macOS/Linux,
-   `%USERPROFILE%\.config\opencode` on Windows). You do not need all of it — start with
-   `agent/orchestrator.md` + a few commands/skills.
-3. Copy `config/opencode.example.jsonc` → `opencode.jsonc`, fill in your own provider keys via
-   environment variables (e.g. `{env:OPENAI_API_KEY}`). **Never** commit a real `opencode.jsonc`.
-4. (Optional, for plugin/tool type-checking) `npm install && npm run typecheck`.
-5. Smoke-test: `vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator`.
+Install the `vulcan` command globally, then confirm it launches the bundled
+opencode runtime:
+
+```bash
+# from the GitHub repo (recommended for friends):
+npm install -g github:slades01/Vulcan-code
+
+# or from a local clone:
+npm install -g .
+
+vulcan --version      # prints the opencode runtime version (e.g. 1.17.9)
+```
+
+This installs the `vulcan` command (a small Node launcher, `bin/vulcan.js`) plus
+the `opencode-ai` runtime as a dependency, so there are no machine-specific
+absolute paths — `vulcan` resolves the runtime wherever npm installed it.
+
+> **Platforms:** Supported OS/CPU are inherited from the `opencode-ai` runtime —
+> Windows, macOS, and Linux on x64/arm64. `vulcan` itself only needs Node.js to launch.
+
+> Debugging tip: point `vulcan` at a different runtime build with
+> `VULCAN_RUNTIME=/path/to/opencode vulcan ...` (handy for local branded builds).
+> On Windows PowerShell:
+> `$env:VULCAN_RUNTIME='C:\path\to\opencode.exe'; vulcan ...`.
+
+Then:
+
+1. Copy the pieces you want into your config directory (`~/.config/opencode` on
+   macOS/Linux, `%USERPROFILE%\.config\opencode` on Windows). You do not need all
+   of it — start with `agent/orchestrator.md` + a few commands/skills.
+2. Copy `config/opencode.example.jsonc` → `opencode.jsonc`, fill in your own
+   provider keys via environment variables (e.g. `{env:OPENAI_API_KEY}`). **Never**
+   commit a real `opencode.jsonc`.
+3. (Optional, for plugin/tool type-checking) `npm install && npm run typecheck`.
+4. Smoke-test: `vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator`.
 
 See [`examples/quickstart.md`](./examples/quickstart.md) and
 [`examples/permissions.md`](./examples/permissions.md).

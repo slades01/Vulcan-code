@@ -5,6 +5,9 @@
   "private": true,
   "license": "MIT",
   "author": "slades01",
+  "bin": {
+    "vulcan": "./bin/vulcan.js"
+  },
   "homepage": "https://github.com/slades01/Vulcan-code",
   "repository": {
     "type": "git",
@@ -41,6 +44,7 @@
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.17.9",
+    "opencode-ai": "1.17.9",
     "@playwright/mcp": "0.0.76"
   },
   "devDependencies": {

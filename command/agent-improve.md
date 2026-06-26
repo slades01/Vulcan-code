@@ -1,5 +1,5 @@
 ---
-description: Run a bounded self-improvement workflow for vulcan agents, commands, skills, tools, or permissions with benchmarks and safety review.
+description: Run a bounded self-improvement workflow for VulcanCode agents, commands, skills, tools, or permissions with benchmarks and safety review.
 agent: agent-evaluator
 model: openai/gpt-5.5-fast
 variant: low

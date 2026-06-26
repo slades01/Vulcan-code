@@ -51,7 +51,7 @@ If the user invokes `/ultra-off` or explicitly asks for conservative/solo mode, 
 - No high/max swarm unless explicitly requested.
 - Keep T0/T1 for non-trivial diffs.
 
-This is a behavioral request override, not a persistent session flag or config mutation; it narrows workflow/fan-out posture and does not rewrite the agent's configured model effort. To stay conservative across multiple turns, the user must keep invoking `/ultra-off` or explicitly restate conservative/solo mode.
+This is a behavioral request override, not a persistent session flag or config mutation. To stay conservative across multiple turns, the user must keep invoking `/ultra-off` or explicitly restate conservative/solo mode.
 
 ## Done condition
 

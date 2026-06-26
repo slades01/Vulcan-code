@@ -22,7 +22,7 @@ This installs the `vulcan` launcher plus the `opencode-ai` runtime as a
 dependency (no machine-specific paths). Confirm it works:
 
 ```bash
-vulcan --version        # prints the opencode runtime version, e.g. 1.17.9
+vulcan --version        # prints the selected opencode runtime version
 ```
 
 > Tip: point `vulcan` at a custom runtime build with
@@ -46,7 +46,7 @@ cp -r /path/to/Vulcan-code/skills/bounded-agent-loops skills/
 cp /path/to/Vulcan-code/config/opencode.example.jsonc opencode.jsonc
 # edit opencode.jsonc, then export keys:
 # set OPENAI_API_KEY in your shell
-# set ZAI_API_TOKEN in your shell
+# set ZAI_API_KEY in your shell
 ```
 
 ## 5. (Optional) type-check TypeScript

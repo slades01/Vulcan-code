@@ -5,7 +5,7 @@ description: Use when coordinating multiple projects, one-session portfolio work
 
 # Portfolio Orchestration
 
-Use this skill when one vulcan session must coordinate multiple projects or a continuous improvement backlog.
+Use this skill when one opencode session must coordinate multiple projects or a continuous improvement backlog.
 
 ## Registry
 

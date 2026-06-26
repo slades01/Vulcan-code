@@ -39,7 +39,7 @@ Track this for every max swarm:
 ## Model Routing
 
 - GLM 5.2: bulk discovery, cartography, spec shards, architecture shards, implementation, TDD, debugging, verification, review, performance, docs, memory.
-- GPT-5.5-fast: top orchestration, wave coordination, final synthesis, security, vulcan config changes, agent evaluation, ambiguous failures, and high-stakes decisions.
+- GPT-5.5-fast: top orchestration, wave coordination, final synthesis, security, VulcanCode config changes, agent evaluation, ambiguous failures, and high-stakes decisions.
 - Mini-fast: title/summary only.
 - For high-confidence waves, reduce correlated blind spots by mixing role types and, where useful, model families: one workhorse lane can be paired with a stronger verifier/synthesis lane instead of more identical workers.
 
@@ -48,7 +48,7 @@ Track this for every max swarm:
 1. Plan gate: depth, node counts, unique mission hashes, file zones, and per-wave cap.
 2. Lane gate: each lane returns its declared verification/evidence signal.
 3. Synthesis gate: reducer collapses duplicates and resolves conflicts.
-4. Scale gate: waves above about 32 lane outputs use GLM 5.2 shard reduction before GPT-5.5-fast final synthesis; leaf outputs default to roughly 400 tokens.
+4. Scale gate: waves above about 32 lane outputs use GLM 5.2 shard pre-reduce before GPT-5.5-fast final synthesis; leaf outputs default to roughly 400 tokens.
 5. Edit gate: all edits are inside leased zones.
 6. Confidence gate: targeted tests/build/lint/browser/security/performance checks as relevant.
 

@@ -79,7 +79,7 @@ Historical last-known-good state: both paths ran `workhorse:3b` + `num_ctx=32768
 - `:8765` research wrapper — `model=workhorse:3b` (verify via `/health`).
 - direct provider — `laptop-gemma/workhorse:3b`.
 
-All acceleration tuning is server-side: `flash_attention` and KV-cache `q8_0` are enabled through the Ollama server env / baked into the `workhorse:3b` tag. Do **not** add `flash_attention` or `cache_type_*` to per-request `options` — this Ollama build rejects them. To mark it available again: run `laptop_workhorse_health.ps1 -Stage ALL` from the desktop (must exit `0`, `overall_ok=true`, which implies `model=workhorse:3b` + `num_ctx=32768` + sustained T2 chats pass), then a fail-fast 1-rep `benchmark_vulcan_workhorse.py --reps 1 --stop-on-failure`, then only after both pass flip the 4 seams in lockstep (see command `laptop-research.md`).
+All acceleration tuning is server-side: `flash_attention` and KV-cache `q8_0` are enabled through the Ollama server env / baked into the `workhorse:3b` tag. Do **not** add `flash_attention` or `cache_type_*` to per-request `options` — this Ollama build rejects them. To mark it available again: run `laptop_workhorse_health.ps1 -Stage ALL` from the desktop (must exit `0`, `overall_ok=true`, which implies `model=workhorse:3b` + `num_ctx=32768` + sustained T2 chats pass), then a fail-fast 1-rep `benchmark_vulcan_workhorse.py --reps 1 --stop-on-failure`, then only after both pass flip the 4 seams in lockstep (see command `laptop-research.md` and `WORKHORSE_HANDOFF.md`).
 
 ## Benchmark reference (desktop-host -> laptop-host, 2026-06-23)
 

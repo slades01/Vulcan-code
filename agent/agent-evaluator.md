@@ -81,7 +81,7 @@ Evaluation dimensions:
 
 Benchmark loop:
 
-- Use `~\.config\opencode\bench\` as the default benchmark root for vulcan agent/command/skill changes.
+- Use `~\.config\opencode\bench\` as the default benchmark root for VulcanCode agent/command/skill changes.
 - Score proposed changes against `bench/tasks/*.md` when relevant and append summarized outcomes to `bench/scorecard.md`.
 - A change can be recommended for promotion only when it has a no-regression signal: pass/fail, wall-clock if measured, model used, verification tier, and residual risk.
 - If a benchmark is not runnable in the current environment, say why and mark the proposal `pending`, not `promoted`.

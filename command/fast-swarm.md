@@ -13,7 +13,7 @@ Rules:
 1a. Use the `speed-acceleration` skill. This command is a speed-budgeted execution path, not just a fan-out path.
 2. Invoking `/fast-swarm` counts as explicit bounded fan-out intent. Use GLM 5.2 for graph planning, cartography, spec, research, architecture, implementation, docs, memory, and verification summaries.
 3. Keep GLM 5.2 on provider/default effort; do not request GLM high/max effort unless the task is demonstrably hard.
-4. Escalate to GPT-5.5-fast only for top synthesis, security, vulcan config changes, repeated failures, or high-stakes ambiguity; use GPT-5.5-fast `low` effort by default.
+4. Escalate to GPT-5.5-fast only for top synthesis, security, VulcanCode config changes, repeated failures, or high-stakes ambiguity; use GPT-5.5-fast `low` effort by default.
 5. Check `usage-accountant` before launch. Unknown/red usage -> focused capped lanes only; yellow -> small GLM-only waves; green -> normal cap 12 concurrent discovery lanes. High cap 32 only when clearly independent and usage allows.
 6. If the usage ledger is fully unknown/stale/null, do not spawn a serial usage-accountant lane just to rediscover unknown; apply unknown policy directly and run a capped useful wave.
 7. Use `pace_guard` when available. Declare phase budget, batch groups, speculative lanes, and starting verification tier before fan-out.

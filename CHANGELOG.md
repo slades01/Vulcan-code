@@ -8,6 +8,8 @@ opencode runtime).
 ## [Unreleased]
 
 ### Added
+- Synced the public package metadata and sanitized snapshot archive to the live
+  VulcanCode runtime version `0.0.0-dev-202606261805`.
 - `skills/ultra-default/SKILL.md` documents VulcanCode's UltraCode-inspired
   workflow-by-default behavior: high-effort orchestration, delegated lanes,
   bounded fan-out, adversarial verification, and T0/T1 safety gates.
@@ -15,6 +17,11 @@ opencode runtime).
   request-local conservative override without mutating config.
 
 ### Changed
+- Mirrored the running VulcanCode agent, command, skill, and benchmark prompt
+  updates into the public repo with local paths and private host details
+  sanitized.
+- Example config and quickstart now use the live setup's `ZAI_API_KEY` variable
+  name for the ZAI Coding Plan provider placeholder.
 - The primary orchestrator now runs at `variant: high` and explicitly treats
   substantive Rung 1+ work as a structured workflow by default while preserving
   anti-waste, usage gating, and credential/destructive-action safety boundaries.
@@ -54,7 +61,7 @@ opencode runtime).
   `vulcan debug ...`.
 - Renamed the `opencode-maintainer` agent to `vulcan-maintainer` and updated its references.
 - Branding cleanup of residual opencode-derived names: the laptop workhorse recovery paths
-  (`~\opencode-workhorse\` → `~\vulcan-workhorse\`) and benchmark script
+  (legacy opencode-branded workhorse path → `~\vulcan-workhorse\`) and benchmark script
   (`benchmark_opencode_workhorse.py` → `benchmark_vulcan_workhorse.py`) in
   `command/laptop-research.md` and `skills/laptop-research-workhorse/SKILL.md` now use
   Vulcan-branded names (recovery-only / unavailable status and `laptop-gemma/*` provider IDs

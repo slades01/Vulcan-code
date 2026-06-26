@@ -11,9 +11,10 @@ skills, plugins, tools, benchmarks, and specs — sanitized of all local paths, 
 private infrastructure, and secrets. Clone it, copy the pieces you want into your own
 `~/.config/opencode`, and adapt.
 
-> Built and tested as the `1.0.0-fast` release. `vulcan --version` delegates to
-> the bundled opencode runtime and prints the runtime version (currently
-> `1.17.9`).
+> Current VulcanCode package version: `0.0.0-dev-202606261805`, matching the
+> live local VulcanCode runtime this snapshot was taken from. The portable GitHub
+> package still launches the bundled `opencode-ai` runtime dependency unless you
+> override it with `VULCAN_RUNTIME`.
 
 > **Compatibility note:** VulcanCode currently uses the [opencode](https://opencode.ai) config
 > schema (`https://opencode.ai/config.json`) and the `@opencode-ai/plugin` SDK under the hood,
@@ -30,7 +31,7 @@ private infrastructure, and secrets. Clone it, copy the pieces you want into you
 
 Grab the whole package as a single archive from this repo:
 
-- [`vulcan-1.0.0-fast.zip`](./vulcan-1.0.0-fast.zip) — sanitized snapshot of this release.
+- [`vulcan-0.0.0-dev-202606261805.zip`](./vulcan-0.0.0-dev-202606261805.zip) — sanitized snapshot of this version.
 
 Or clone:
 
@@ -64,7 +65,7 @@ npm install -g github:slades01/Vulcan-code
 # or from a local clone:
 npm install -g .
 
-vulcan --version      # prints the opencode runtime version (e.g. 1.17.9)
+vulcan --version      # prints the selected opencode runtime version
 ```
 
 This installs the `vulcan` command (a small Node launcher, `bin/vulcan.js`) plus

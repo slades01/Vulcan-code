@@ -62,7 +62,7 @@ Use this skill to run work as a coordinated swarm instead of a single linear pas
 - Treat 1000 agents as a logical run capacity across bounded waves, not a reason to duplicate work. Keep each graph/tool wave at or below 512 nodes and prefer 128-256 planned read-only lanes, staged in micro-batches of about 32, when usage is green.
 - Maintain a wave manifest: run id, wave id, node ids, mission hashes, file-ownership zones, model/cost class, dependencies, verification signal, status, and reducer output.
 - Barrier after every wave: synthesize, deduplicate mission-hash collisions, audit edits against zones, then plan the next wave only if new independent work remains.
-- Use two-tier reduce for waves above about 32 lane outputs: shard reduction with GLM 5.2, then GPT-5.5-fast final synthesis over shard summaries.
+- Use two-tier reduce for waves above about 32 lane outputs: shard pre-reduce with GLM 5.2, then GPT-5.5-fast final synthesis over shard summaries.
 - Editing remains one writer per file-ownership zone regardless of swarm size.
 
 ## Best Default Graph

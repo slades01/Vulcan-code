@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "vulcan-code",
-  "version": "1.0.0-fast",
-  "description": "Public VulcanCode 1.0.0-fast agent configuration package: agents, commands, skills, plugins, tools, benchmarks, and specs for a high-autonomy, security-first coding-agent setup (built on the opencode runtime).",
+  "version": "0.0.0-dev-202606261805",
+  "description": "Public VulcanCode 0.0.0-dev-202606261805 agent configuration package: agents, commands, skills, plugins, tools, benchmarks, and specs for a high-autonomy, security-first coding-agent setup (built on the opencode runtime).",
   "private": true,
   "license": "MIT",
   "author": "slades01",
@@ -32,7 +32,7 @@
   ],
   "vulcan": {
     "runtime": "opencode",
-    "version": "1.0.0-fast"
+    "version": "0.0.0-dev-202606261805"
   },
   "scripts": {
     "typecheck": "tsc --noEmit --pretty false",
@@ -40,7 +40,9 @@
     "config:config": "vulcan debug config",
     "config:agent": "vulcan debug agent",
     "config:orchestrator": "vulcan debug agent orchestrator",
-    "config:health": "vulcan --version && vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator"
+    "config:health": "vulcan --version && vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator",
+    "config:agents": "vulcan agent list",
+    "config:mcp": "vulcan mcp list"
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.17.9",

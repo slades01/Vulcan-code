@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Only the latest tagged release on `main` is supported (currently `v1.0.0-fast`).
+Only the latest version on `main` is supported (currently `0.0.0-dev-202606261805`).
 
 ## Reporting a vulnerability
 

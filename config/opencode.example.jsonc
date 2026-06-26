@@ -1,4 +1,4 @@
-﻿// VulcanCode — example configuration (1.0.0-fast)
+﻿// VulcanCode — example configuration (0.0.0-dev-202606261805)
 //
 // This is a FROM-SCRATCH template with PLACEHOLDER values only. It intentionally
 // contains no real keys. Copy to `opencode.jsonc`, then set the referenced
@@ -27,7 +27,7 @@
     },
     "zai-coding-plan": {
       "name": "ZAI Coding Plan",
-      "options": { "apiKey": "{env:ZAI_API_TOKEN}" },
+      "options": { "apiKey": "{env:ZAI_API_KEY}" },
       "models": {
         "glm-5.2": { "name": "GLM 5.2" }
       }

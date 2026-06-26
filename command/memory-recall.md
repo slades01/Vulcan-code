@@ -1,5 +1,5 @@
 ---
-description: Recall compact non-secret project or vulcan setup memory before planning or implementation.
+description: Recall compact non-secret project or VulcanCode setup memory before planning or implementation.
 agent: orchestrator
 ---
 

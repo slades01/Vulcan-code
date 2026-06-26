@@ -7,6 +7,18 @@ opencode runtime).
 
 ## [Unreleased]
 
+### Added
+- `skills/ultra-default/SKILL.md` documents VulcanCode's UltraCode-inspired
+  workflow-by-default behavior: high-effort orchestration, delegated lanes,
+  bounded fan-out, adversarial verification, and T0/T1 safety gates.
+- `/ultra` and `/ultra-off` commands make the default mode explicit or provide a
+  request-local conservative override without mutating config.
+
+### Changed
+- The primary orchestrator now runs at `variant: high` and explicitly treats
+  substantive Rung 1+ work as a structured workflow by default while preserving
+  anti-waste, usage gating, and credential/destructive-action safety boundaries.
+
 ### Fixed
 - `vulcan` command now actually launches: the package declares a `bin` entry
   (`"vulcan": "./bin/vulcan.js"`) and depends on the `opencode-ai` runtime

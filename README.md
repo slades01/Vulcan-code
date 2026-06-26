@@ -1,8 +1,9 @@
 # VulcanCode
 
 **VulcanCode** is a clean, **public** agent configuration package — a high-autonomy,
-security-first coding-agent setup built around GLM + GPT model routing, bounded agent loops,
-parallel orchestration, and a deny-by-default permission posture. You launch it with the
+security-first coding-agent setup built around UltraCode-inspired workflow-by-default
+orchestration, GLM + GPT model routing, bounded agent loops, parallel execution, and a
+deny-by-default permission posture. You launch it with the
 `vulcan` command.
 
 This repository contains the shareable subset of a live VulcanCode setup: agents, commands,
@@ -42,8 +43,8 @@ git clone https://github.com/slades01/Vulcan-code.git
 | Path | Contents |
 |---|---|
 | `agent/` | 33 agent definitions — orchestrator, build-lead, implementation/verification/optimization lanes, TDD engineer, debugger, research/synthesis/planning leads, panels, etc. |
-| `command/` | 26 slash commands — `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more. |
-| `skills/` | 8 skills — bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable). |
+| `command/` | 28 slash commands — `/ultra`, `/ultra-off`, `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more. |
+| `skills/` | 9 skills — ultra-default, bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable). |
 | `plugins/` | `trusted-autonomy.ts` (deny-by-default autonomy plugin) and `swarm-compaction.ts`. |
 | `tools/` | `loop_guard.ts` and `pace_guard.ts` — bounded loop / wall-clock pace contracts. |
 | `bench/` | Benchmark tasks, scorecard, and a Rung-2 spec gate. See `bench/README.md`. |
@@ -91,6 +92,15 @@ Then:
 
 See [`examples/quickstart.md`](./examples/quickstart.md) and
 [`examples/permissions.md`](./examples/permissions.md).
+
+## Default operating mode
+
+VulcanCode ships with UltraCode-inspired behavior as the orchestrator default:
+substantive Rung 1+ work is treated as a structured workflow with visible planning,
+delegated specialist lanes, bounded fan-out, adversarial review, and T0/T1 verification
+before final. Rung 0 stays lean and inline; high/max swarms still require genuine
+parallelism and usage gating. Use `/ultra` to make the default explicit for one request,
+or `/ultra-off` for a request-local conservative/solo override.
 
 ## Security posture
 

@@ -25,6 +25,11 @@ opencode runtime).
   (`1.17.9`, matching `@opencode-ai/plugin`), so `npm install -g .` /
   `npm install -g github:slades01/Vulcan-code` creates a working `vulcan` command
   with no machine-specific absolute paths.
+- Tracked the Vulcan wordmark **L/A glyph** correction as a patch artifact:
+  `patches/opencode/vulcan-wordmark-logo.patch` is a minimal, `git apply`-able
+  diff for the opencode runtime's `packages/tui/src/logo.ts` that fixes the bottom
+  row of the "Vulcan" pixel wordmark (the `l`/`a` cells), with `patches/README.md`
+  documenting how to apply it from an opencode checkout and rebuild the runtime.
 
 ### Added
 - `bin/vulcan.js` — portable CommonJS launcher (Node, shebang). Resolves the

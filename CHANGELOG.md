@@ -16,12 +16,26 @@ opencode runtime).
 - `npm run config:health` and the documented smoke tests now run `vulcan --version` /
   `vulcan debug ...`.
 - Renamed the `opencode-maintainer` agent to `vulcan-maintainer` and updated its references.
+- Branding cleanup of residual opencode-derived names: the laptop workhorse recovery paths
+  (`~\opencode-workhorse\` → `~\vulcan-workhorse\`) and benchmark script
+  (`benchmark_opencode_workhorse.py` → `benchmark_vulcan_workhorse.py`) in
+  `command/laptop-research.md` and `skills/laptop-research-workhorse/SKILL.md` now use
+  Vulcan-branded names (recovery-only / unavailable status and `laptop-gemma/*` provider IDs
+  are preserved).
+- `examples/quickstart.md` no longer links VulcanCode to `https://opencode.ai`; the opencode
+  install docs are referenced only as the underlying runtime.
+- `package.json` metadata key `opencode` renamed to a Vulcan-branded `vulcan` object; the
+  `@opencode-ai/plugin` dependency is unchanged.
+- `README.md` adds a preserved-identifiers note clarifying that `opencode-go/...` provider/model
+  IDs are intentional provider identifiers, not stale branding.
 
 ### Preserved (intentional technical references)
 - Config schema URL `https://opencode.ai/config.json` and the `@opencode-ai/plugin` SDK —
   VulcanCode uses the opencode config schema and plugin SDK under the hood.
 - Config file/dir names the runtime loads: `opencode.jsonc`, `config/opencode.example.jsonc`,
   `~/.config/opencode`, `.opencode/`.
+- `opencode-go/...` provider/model IDs (panel agents) and `laptop-gemma/*` provider IDs —
+  registered provider identifiers, not stale branding.
 
 ## [1.0.0-fast] - 2026-06-25
 

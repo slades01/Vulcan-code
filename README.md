@@ -17,6 +17,11 @@ private infrastructure, and secrets. Clone it, copy the pieces you want into you
 > so config files live in the standard opencode locations (`~/.config/opencode`, `.opencode/`)
 > and use the `opencode.jsonc` filename. `vulcan` is the branded launch command for the same
 > runtime.
+>
+> **Preserved identifiers:** Provider/model IDs of the form `opencode-go/...` (used by the
+> panel agents) are **intentional provider identifiers** for the OpenCode Go model-routing
+> provider, not stale branding. They are wired into registered providers and should not be
+> renamed.
 
 ## Download
 

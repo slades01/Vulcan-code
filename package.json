@@ -27,7 +27,8 @@
     "ai-coding",
     "developer-tools"
   ],
-  "opencode": {
+  "vulcan": {
+    "runtime": "opencode",
     "version": "1.0.0-fast"
   },
   "scripts": {

@@ -12,7 +12,7 @@ Before any enable is even considered, the desktop-origin health gate must pass. 
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File ~\opencode-workhorse\laptop_workhorse_health.ps1 `
+  -File ~\vulcan-workhorse\laptop_workhorse_health.ps1 `
   -Stage ALL
 ```
 
@@ -20,7 +20,7 @@ It must exit `0` with `overall_ok=true`. `ALL` implies `T2` (sustained repeated 
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File ~\opencode-workhorse\laptop_workhorse_health.ps1 `
+  -File ~\vulcan-workhorse\laptop_workhorse_health.ps1 `
   -Stage T0 -TimeoutSec 2
 ```
 
@@ -34,7 +34,7 @@ Re-enabling is only allowed after, in order:
 2. **A fail-fast 1-rep benchmark** passes:
 
    ```powershell
-   python ~\opencode-workhorse\benchmark_opencode_workhorse.py `
+   python ~\vulcan-workhorse\benchmark_vulcan_workhorse.py `
      --ollama http://LAPTOP_HOST:11434 --models workhorse:3b `
      --mode generate --reps 1 --warmup 1 `
      --num-ctx 32768 --num-predict 768 --num-batch 4096 `

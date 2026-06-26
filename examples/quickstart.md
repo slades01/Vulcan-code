@@ -2,8 +2,8 @@
 
 ## 1. Prerequisites
 
-- [VulcanCode](https://opencode.ai) installed (the `vulcan` command); `vulcan --version`
-  reports `1.0.0-fast`.
+- The `vulcan` command installed; `vulcan --version` reports `1.0.0-fast`. See the
+  [opencode](https://opencode.ai) install docs for the underlying runtime.
 - Node.js + npm (only needed if you want to type-check the TypeScript plugins/tools).
 - At least one provider API key exported in your environment.
 

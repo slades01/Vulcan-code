@@ -7,7 +7,168 @@ opencode runtime).
 
 ## [Unreleased]
 
+### Changed — Scorecard executable gate signal hardening (2026-06-28)
+- `bench/run.mjs` now rejects executable scorecard rows whose verification signal
+  lacks `gate_mode=executable`, closing a validator gap where a row could set
+  `Mode=executable` while carrying only prose/manual evidence.
+- The scorecard validator now rejects any non-passing executable row, not just
+  the newest row, and the self-test includes both missing-gate and older-fail
+  negative cases so future benchmark runs fail closed before appending promotion
+  evidence.
+- Historical scorecard rows are now checked separately: only
+  `prompt-only-historical` and `failed-executable-historical` modes are allowed
+  below the historical heading, so promotable-looking executable/manual rows
+  cannot be hidden there.
+- Historical rows now also require a non-empty mode and the expected column
+  count, closing structural gaps that could otherwise hide malformed provenance
+  rows below the historical heading.
+- The historical heading detector now tolerates dash/wording variants that still
+  say `not promotion evidence`, so a manual punctuation edit cannot silently
+  disable historical-section validation.
+
+### Changed — Recall spec source coverage (2026-06-28)
+- `tools/recall_bus.ts` now enumerates all `spec/VULCANCODE_*.md` files under the
+  selected setup root instead of reading only the historical
+  `VULCANCODE_RND_2026-06-27.md` file, so newer recall/benchmark specs are
+  discoverable by the advertised `rnd-spec` source.
+- `bench:recall` now runs the actual `recall_bus` tool against a temporary setup
+  root with multiple spec files, and `bench/run.mjs` adds a
+  `recall-bus:spec-source` guardrail so this does not silently regress.
+- Added `spec/VULCANCODE_RECALL_SPEC_SOURCE_2026-06-28.md` documenting the
+  acceptance criteria and restart note for runtime-loaded tool changes.
+
+### Added — Package parity + fast bench gate (2026-06-28)
+- Ported the non-secret live helper tools into the package so in-package users
+  get the same workflow capabilities: `tools/mission_state.ts` (one-writer
+  file-zone leases + continuation state), `tools/recall_bus.ts` +
+  `tools/recall_bus_lib.mjs` + `tools/recall_bus_lib.d.mts` (tiered redacted
+  retrieval), `tools/synthesis.ts` (convergence helper), and
+  `plugins/metrics-tap.ts` (non-secret `.opencode/run/metrics.jsonl` event tail).
+- `bench/recall-golden.mjs` + `bench/fixtures/recall/{redaction,relevance}.json`
+  — recall-bus golden test: synthetic-secret redaction invariants and frozen
+  cross-source relevance/hit@3 triples. Wired as `npm run bench:recall`.
+- Benchmark tasks `long-horizon-continuation.md`, `lease-conflict.md`,
+  `swarm-converge.md`, and a portable `helper-tools-present.md` presence task.
+
+### Changed — Package parity + fast bench gate (2026-06-28)
+- `bench/run.mjs` now parallelizes the independent read-only vulcan checks and
+  the `codemap:bench` / `recall:golden` / `helper-tools` batch; check labels and
+  order stay deterministic and each check records per-run timing in the
+  verification signal as `label=status@Nms`. Added `recall:golden` and
+  `helper-tools` presence checks. Live-identity / dist-next shim checks are now
+  opt-in via `VULCAN_BENCH_LIVE_IDENTITY=1`. A missing
+  `.opencode/run/state.json` continuation state passes/skips (only fails when
+  state exists but is corrupt/missing its hash). Negative control still forces
+  failure.
+- Synced `tools/agent_graph.ts` (graph partitioning + `maxNodes`),
+  `tools/loop_guard.ts`, `tools/pace_guard.ts` (optional metrics-tail verdicts),
+  and `plugins/swarm-compaction.ts` (state.json continuation snapshot) from the
+  live setup.
+- `tools/recall_bus.ts` default setup root is a portable
+  `path.join(os.homedir(), ".config", "opencode")` — no hardcoded per-user path.
+- `config/opencode.example.jsonc` documents the helper tool permissions
+  (`loop_guard`, `pace_guard`, `synthesis`, `recall_bus`, `mission_state`) and the
+  commented plugin block including `metrics-tap.ts`.
+- README, `bench/README.md`, and `spec/VULCANCODE_PACKAGE_PARITY_2026-06-28.md`
+  document the wave, verification, and restart requirement.
+
+### Changed — Benchmark task coverage hardening (2026-06-28)
+- `bench/run.mjs` now treats `parse:*` task checks as parse-only and requires
+  `task-coverage=pass` before a benchmark row can count as promotion evidence.
+  Each task is bound to at least one deterministic local check.
+- Added fixture checks for Mission State continuation hashes and metrics-tap
+  JSONL schema, plus ambient metrics validation when `.opencode/run/metrics.jsonl`
+  exists. Raw metrics arguments are never printed.
+- Scorecard appends are pass-only and revalidate the actual rendered row before
+  writing; negative-control/failing/pending runs print evidence but do not append
+  promotion rows.
+- Runtime-unavailable detection is scoped to `runtime:where-vulcan` so real
+  deterministic check failures cannot be mislabeled as environment `pending`.
+- `bench/codemap-smoke.mjs` isolates its temporary fixture by setup root to avoid
+  package/live benchmark races.
+- Added `spec/VULCANCODE_BENCH_TASK_COVERAGE_2026-06-28.md` documenting the
+  acceptance criteria and residual non-goals.
+
 ### Added
+- **Code Memory** — a Cognee-like local code-graph overlay (deterministic
+  Extract → Cognify → Load) that scans a repo and persists files/symbols/edges
+  into `.opencode/codemap/{nodes.jsonl,edges.jsonl,manifest.json}`, enabling
+  structural recall from a precomputed graph instead of rebuilding cartography
+  every task.
+  - `tools/codemap/lib.mjs` — pure Node ESM engine (no external deps). Exports
+    `generateCodemap`, `recallCodemap`, `healthCodemap`, `benchCodemap`.
+    Deterministic output ordering and reproducible canonical digests; atomic-ish
+    temp-file-then-rename writes.
+  - `tools/codemap/{generate,recall,health,bench}.mjs` — CLI wrappers
+    (`--root`, `--out`, `--query`, `--limit`).
+  - `tools/code_memory.ts` (`code_memory` tool: op = `generate|recall|health|bench`,
+    dynamic-imports the engine) and `tools/codemap_health.ts` (`codemap_health`
+    quick health tool).
+  - `tools/codemap/lib.d.mts` — type declarations so the plugin tools typecheck.
+  - Node/symbol/edge provenance: `repoRoot`, `path`, `startLine`/`endLine`,
+    `sourceHash` (sha256 of owning file), `mtimeMs`, `capturedAt`, `capturedBy`,
+    `status`. Edge types: `defines`, `imports` (resolved + unresolved
+    `targetStatus`), `calls`, `documents`.
+  - Secret-safe by construction: credential-like paths/patterns are excluded from
+    scanning; file content is scanned (AWS/OpenAI/GitHub/Slack/Stripe keys, bearer
+    tokens, private-key blocks, obvious secret assignments) before any
+    snippet/doc/signature is persisted; suspected secrets are redacted and never
+    written. Placeholder values like `{env:NAME}` are exempted.
+  - `agent/code-memory-curator.md` (safe curation guidance), `command/codemap.md`
+    (command wrapper), and `spec/codemap.md` (data model, safety, performance,
+    verification).
+  - `npm run codemap:{generate,health,recall,bench}` scripts.
+- `.gitignore` now excludes `.opencode/` (generated overlay / runtime output).
+
+### Changed — Code Memory richer parsers (v1.1)
+- `tools/codemap/lib.mjs` Cognify now uses **optional real parsers**, discovered
+  once per process and fully degrading to the v1 regex extractors:
+  - **JS/TS family** is parsed with the TypeScript compiler API when a trusted
+    engine-local `typescript` resolves (`ts.createSourceFile`, pure parse). New `symbolKind` values:
+    `method`, `accessor` (get/set), `interface`, `type` (alias), `enum`,
+    `namespace`, and `const`/`export` variable bindings; constructors are tagged
+    `method`. Imports now include side-effect (`import "./x"`) and re-export
+    (`export ... from`) specs. Call sites are direct `Identifier` callees. Real
+    `startLine`/`endLine` spans, declaration-head signatures, and leading-comment
+    docs are extracted.
+  - **Python** can be parsed with the stdlib `ast` module via a short-lived spawned
+    process only when `VULCAN_CODE_MEMORY_PYTHON` points to an absolute trusted
+    Python 3 binary. Content is passed as JSON over **stdin
+    bytes** (`sys.stdin.buffer.read()` + `json.loads`), decoded UTF-8 regardless
+    of host locale, with a leading UTF-8 BOM tolerated. Extracts `function`/`async
+    def`, `class`, methods (by parent), imports, direct Name call sites, real
+    `lineno`/`end_lineno`, and docstrings. A per-file `SyntaxError` falls back to
+    a richer indentation-aware regex for that file only; without the env var,
+    Python uses that safe regex fallback by default.
+- `assignEndLines` now preserves real parser spans; only regex symbols get the
+  "until next symbol" approximation. The local `calls` resolver treats
+  `function`, `method`, and `accessor` as callables.
+- `manifest.json` gains a `parsers` field (`typescript`/`python` availability +
+  version/bin + per-file `usage` counts), surfaced in the `generate` markdown. It
+  records environment/availability and does not feed node/edge digests, so it
+  cannot break reproducible canonical integrity.
+- Safety preserved: parsers run only after the secret scan, on already-read
+  content, inside the validated root/out guards; no network; the Python helper
+  never touches the filesystem.
+- `tools/codemap/lib.d.mts` adds optional `CodemapParserInfo`/`CodemapParserUsage`
+  types on `CodemapManifest.parsers`.
+- `spec/codemap.md` (status v1.1; extraction, kinds, edge cases), README Code
+  Memory section, and this changelog updated to describe the AST upgrade.
+
+### Changed
+- `command/memory-recall.md` uses `code_memory` recall (when available) after the
+  markdown recall pass and surfaces stale/missing codemap status.
+- `agent/memory-curator.md` and `agent/orchestrator.md` prime recall with the
+  structured code graph (`code_memory`/`codemap_health`) when code structure/file
+  impact is relevant, before broad cartography.
+- `config/opencode.example.jsonc` documents optional `./tools/code_memory.ts` and
+  `./tools/codemap_health.ts` plugin entries plus `code_memory`/`codemap_health`
+  allow permissions.
+- README "What's included" tools row and a new Code Memory subsection; README
+  verification notes the codemap CLI gate.
+
+### Added
+
 - Synced the public package metadata and sanitized snapshot archive to the live
   VulcanCode runtime version `0.0.0-dev-202606261805`.
 - `skills/ultra-default/SKILL.md` documents VulcanCode's UltraCode-inspired
@@ -17,6 +178,12 @@ opencode runtime).
   request-local conservative override without mutating config.
 
 ### Changed
+- `vulcan --version` / `vulcan -v` now reports VulcanCode's own brand and
+  version (`VulcanCode 1.0`) instead of forwarding `--version` to the opencode
+  runtime (which printed `opencode <version>`). Brand and display version are
+  read from `package.json` (`vulcan.brand` / `vulcan.displayVersion`), and the
+  check runs before runtime resolution so it works even when the runtime is not
+  installed. Non-version arguments still forward to the runtime unchanged.
 - Mirrored the running VulcanCode agent, command, skill, and benchmark prompt
   updates into the public repo with local paths and private host details
   sanitized.

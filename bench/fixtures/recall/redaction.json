@@ -1,0 +1,12 @@
+{
+  "sentinels": [
+    "Bearer abcdefghijklmnopqrstuvwxyz123456",
+    "AKIA1234567890ABCDEF",
+    "sk-abcdefghijklmnopqrstuvwxyz1234567890",
+    "ghp_abcdefghijklmnopqrstuvwxyz1234567890",
+    "API_TOKEN=synthetic-token-value-12345",
+    "file:///tmp/fake/sensitive/.env"
+  ],
+  "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASC\n-----END PRIVATE KEY-----",
+  "cleanText": "function getTokenLabel(name) { return `token label: ${name}` }\nconst API_TOKEN = makeToken()\nThis prose mentions password policy without containing a password value."
+}

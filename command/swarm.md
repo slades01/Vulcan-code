@@ -13,7 +13,7 @@ Use this protocol:
 1a. Use the `speed-acceleration` skill for phase ceilings, batching, speculative-lane discard, and post-run speed learning.
 2. Declare autonomy level, usage state, wall-clock phase budget, fan-out budget, total node budget, nesting depth, and model-routing plan. If usage ledger is fully unknown/stale/null, apply unknown policy directly instead of spawning a serial usage-accountant lane.
 3. Generate an agent node map with topology, dependencies, parallel batches, phase SLOs, depth, cost class, file ownership, and verification gates.
-4. Launch independent research lanes in parallel and batch independent tool/MCP reads in one turn. Use at least two lanes when the work spans multiple areas; use more when there are clearly independent concerns.
+4. Launch independent research lanes in parallel and batch independent tool/MCP reads in one turn. Use multiple lanes only when concerns are independent, file zones or questions are separable, and reducer synthesis will not duplicate work. Do not add lanes merely because a task has multiple aspects.
 5. Synthesize the lane results into one execution path.
 6. Implement the smallest correct change with one editing lane per file ownership area.
 7. Launch verification, review, security, and performance lanes when relevant. After an edit lands, run read-only verification/review lanes concurrently unless one depends on the other's output.

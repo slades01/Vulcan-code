@@ -1,0 +1,12 @@
+diff --git a/packages/tui/src/feature-plugins/sidebar/footer.tsx b/packages/tui/src/feature-plugins/sidebar/footer.tsx
+--- a/packages/tui/src/feature-plugins/sidebar/footer.tsx
++++ b/packages/tui/src/feature-plugins/sidebar/footer.tsx
+@@ -69,7 +69,7 @@
+         <span style={{ fg: theme().text }}>{path().name}</span>
+       </text>
+       <text fg={theme().textMuted}>
+-        <span style={{ fg: theme().success }}>•</span> <b>Open</b>
++        <span style={{ fg: theme().success }}>•</span> <b>Vulcan</b>
+         <span style={{ fg: theme().text }}>
+           <b>Code</b>
+         </span>{" "}

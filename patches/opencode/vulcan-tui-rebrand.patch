@@ -1,0 +1,136 @@
+diff --git a/packages/tui/src/app.tsx b/packages/tui/src/app.tsx
+index 57b99c4..2628a02 100644
+--- a/packages/tui/src/app.tsx
++++ b/packages/tui/src/app.tsx
+@@ -444,24 +444,24 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
+     if (!terminalTitleEnabled() || Flag.OPENCODE_DISABLE_TERMINAL_TITLE) return
+ 
+     if (route.data.type === "home") {
+-      renderer.setTerminalTitle("OpenCode")
++      renderer.setTerminalTitle("VulcanCode")
+       return
+     }
+ 
+     if (route.data.type === "session") {
+       const session = sync.session.get(route.data.sessionID)
+       if (!session || isDefaultTitle(session.title)) {
+-        renderer.setTerminalTitle("OpenCode")
++        renderer.setTerminalTitle("VulcanCode")
+         return
+       }
+ 
+       const title = session.title.length > 40 ? session.title.slice(0, 37) + "..." : session.title
+-      renderer.setTerminalTitle(`OC | ${title}`)
++      renderer.setTerminalTitle(`VC | ${title}`)
+       return
+     }
+ 
+     if (route.data.type === "plugin") {
+-      renderer.setTerminalTitle(`OC | ${route.data.id}`)
++      renderer.setTerminalTitle(`VC | ${route.data.id}`)
+     }
+   })
+ 
+@@ -1041,7 +1041,7 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
+     await DialogAlert.show(
+       dialog,
+       "Update Complete",
+-      `Successfully updated to OpenCode v${result.data.version}. Please restart the application.`,
++      `Successfully updated to VulcanCode v${result.data.version}. Please restart the application.`,
+     )
+ 
+     void exit()
+diff --git a/packages/tui/src/attention.ts b/packages/tui/src/attention.ts
+index b309edc..17c2b1f 100644
+--- a/packages/tui/src/attention.ts
++++ b/packages/tui/src/attention.ts
+@@ -45,7 +45,7 @@ const TITLE_LIMIT = 80
+ const MESSAGE_LIMIT = 240
+ const BUILTIN_PACK: RegisteredSoundPack = {
+   id: DEFAULT_PACK_ID,
+-  name: "OpenCode Default",
++  name: "VulcanCode Default",
+   builtin: true,
+   sounds: {
+     default: defaultSoundPath,
+diff --git a/packages/tui/src/feature-plugins/home/tips-view.tsx b/packages/tui/src/feature-plugins/home/tips-view.tsx
+index 16354a5..fabe586 100644
+--- a/packages/tui/src/feature-plugins/home/tips-view.tsx
++++ b/packages/tui/src/feature-plugins/home/tips-view.tsx
+@@ -233,12 +233,12 @@ const TIPS: Tip[] = [
+   "Tool definitions can invoke scripts written in Python, Go, etc",
+   "Add {highlight}.ts{/highlight} files to {highlight}.opencode/plugins/{/highlight} for event hooks",
+   "Use plugins to send OS notifications when sessions complete",
+-  "Create a plugin to prevent OpenCode from reading sensitive files",
++  "Create a plugin to prevent VulcanCode from reading sensitive files",
+   "Use {highlight}opencode run{/highlight} for non-interactive scripting",
+   "Use {highlight}opencode --continue{/highlight} to resume the last session",
+   "Use {highlight}opencode run -f file.ts{/highlight} to attach files via CLI",
+   "Use {highlight}--format json{/highlight} for machine-readable output in scripts",
+-  "Run {highlight}opencode serve{/highlight} for headless API access to OpenCode",
++  "Run {highlight}opencode serve{/highlight} for headless API access to VulcanCode",
+   "Use {highlight}opencode run --attach{/highlight} to connect to a running server",
+   "Run {highlight}opencode upgrade{/highlight} to update to the latest version",
+   "Run {highlight}opencode auth list{/highlight} to see all configured providers",
+diff --git a/packages/tui/src/feature-plugins/sidebar/footer.tsx b/packages/tui/src/feature-plugins/sidebar/footer.tsx
+index c59046a..157f235 100644
+--- a/packages/tui/src/feature-plugins/sidebar/footer.tsx
++++ b/packages/tui/src/feature-plugins/sidebar/footer.tsx
+@@ -53,7 +53,7 @@ function View(props: { api: TuiPluginApi; sessionID: string }) {
+                 ✕
+               </text>
+             </box>
+-            <text fg={theme().textMuted}>OpenCode includes free models so you can start immediately.</text>
++            <text fg={theme().textMuted}>VulcanCode includes free models so you can start immediately.</text>
+             <text fg={theme().textMuted}>
+               Connect from 75+ providers to use other models, including Claude, GPT, Gemini etc
+             </text>
+@@ -69,7 +69,7 @@ function View(props: { api: TuiPluginApi; sessionID: string }) {
+         <span style={{ fg: theme().text }}>{path().name}</span>
+       </text>
+       <text fg={theme().textMuted}>
+-        <span style={{ fg: theme().success }}>•</span> <b>Open</b>
++        <span style={{ fg: theme().success }}>•</span> <b>Vulcan</b>
+         <span style={{ fg: theme().text }}>
+           <b>Code</b>
+         </span>{" "}
+diff --git a/packages/tui/src/routes/session/permission.tsx b/packages/tui/src/routes/session/permission.tsx
+index 766ed3c..8ded867 100644
+--- a/packages/tui/src/routes/session/permission.tsx
++++ b/packages/tui/src/routes/session/permission.tsx
+@@ -141,11 +141,11 @@ export function PermissionPrompt(props: { request: PermissionRequest; directory?
+           body={
+             <Switch>
+               <Match when={props.request.always.length === 1 && props.request.always[0] === "*"}>
+-                <TextBody title={"This will allow " + props.request.permission + " until OpenCode is restarted."} />
++                <TextBody title={"This will allow " + props.request.permission + " until VulcanCode is restarted."} />
+               </Match>
+               <Match when={true}>
+                 <box paddingLeft={1} gap={1}>
+-                  <text fg={theme.textMuted}>This will allow the following patterns until OpenCode is restarted</text>
++                  <text fg={theme.textMuted}>This will allow the following patterns until VulcanCode is restarted</text>
+                   <box>
+                     <For each={props.request.always}>
+                       {(pattern) => (
+@@ -483,7 +483,7 @@ function RejectPrompt(props: { onConfirm: (message: string) => void; onCancel: (
+           <text fg={theme.text}>Reject permission</text>
+         </box>
+         <box paddingLeft={1}>
+-          <text fg={theme.textMuted}>Tell OpenCode what to do differently</text>
++          <text fg={theme.textMuted}>Tell VulcanCode what to do differently</text>
+         </box>
+       </box>
+       <box
+diff --git a/packages/tui/src/routes/session/sidebar.tsx b/packages/tui/src/routes/session/sidebar.tsx
+index 0c5d2b3..76ce5e2 100644
+--- a/packages/tui/src/routes/session/sidebar.tsx
++++ b/packages/tui/src/routes/session/sidebar.tsx
+@@ -89,7 +89,7 @@ export function Sidebar(props: { sessionID: string; overlay?: boolean }) {
+         <box flexShrink={0} gap={1} paddingTop={1}>
+           <pluginRuntime.Slot name="sidebar_footer" mode="single_winner" session_id={props.sessionID}>
+             <text fg={theme.textMuted}>
+-              <span style={{ fg: theme.success }}>•</span> <b>Open</b>
++              <span style={{ fg: theme.success }}>•</span> <b>Vulcan</b>
+               <span style={{ fg: theme.text }}>
+                 <b>Code</b>
+               </span>{" "}

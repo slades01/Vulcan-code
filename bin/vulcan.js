@@ -77,9 +77,46 @@ function resolveRuntime() {
   return { command: binPath, label: binPath };
 }
 
+// vulcan reports its own brand and version for --version/-v instead of
+// forwarding those flags to the opencode runtime (which would print
+// "opencode <version>"). Brand and display version are read from
+// VulcanCode's own package.json (`vulcan.brand` / `vulcan.displayVersion`),
+// falling back to hardcoded defaults if the file is unreadable. This runs
+// before runtime resolution so `vulcan --version` works even when the
+// opencode runtime is not installed.
+var VULCAN_DEFAULT_BRAND = "VulcanCode";
+var VULCAN_DEFAULT_VERSION = "1.0";
+
+function readBranding() {
+  try {
+    var pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "package.json"), "utf8"));
+    var meta = (pkg && pkg.vulcan) || {};
+    return {
+      brand: meta.brand || VULCAN_DEFAULT_BRAND,
+      version: meta.displayVersion || VULCAN_DEFAULT_VERSION,
+    };
+  } catch (err) {
+    return { brand: VULCAN_DEFAULT_BRAND, version: VULCAN_DEFAULT_VERSION };
+  }
+}
+
+function isVersionRequest(args) {
+  return args.some(function (a) {
+    return a === "--version" || a === "-v" || a.indexOf("--version=") === 0;
+  });
+}
+
+var args = process.argv.slice(2);
+
+if (isVersionRequest(args)) {
+  var branding = readBranding();
+  process.stdout.write(branding.brand + " " + branding.version + "\n");
+  process.exit(0);
+}
+
 var runtime = resolveRuntime();
 
-var child = spawn(runtime.command, process.argv.slice(2), {
+var child = spawn(runtime.command, args, {
   stdio: "inherit",
   env: process.env,
 });

@@ -22,7 +22,7 @@ This installs the `vulcan` launcher plus the `opencode-ai` runtime as a
 dependency (no machine-specific paths). Confirm it works:
 
 ```bash
-vulcan --version        # prints the selected opencode runtime version
+vulcan --version        # prints the VulcanCode version (e.g. "VulcanCode 1.0")
 ```
 
 > Tip: point `vulcan` at a custom runtime build with

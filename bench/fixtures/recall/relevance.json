@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "source": "codemap",
+      "score": 72,
+      "text": "Codemap symbol edge: MissionState acquire-zone detects overlapping file-zone lease conflicts."
+    },
+    {
+      "source": "memory-index",
+      "score": 8,
+      "text": "Memory note repeats many generic words about mission state zone lease overlap conflict benchmark verification."
+    },
+    {
+      "source": "rnd-spec",
+      "score": 4,
+      "text": "Tiered Retrieval Bus needs provenance and hit@3 relevance bench with redacted recall output from current VulcanCode spec files."
+    },
+    {
+      "source": "speed-ledger",
+      "score": 3,
+      "text": "Executable scorecard gate mode rows prevent prompt-only promotion evidence."
+    }
+  ],
+  "magnitudeItems": [
+    {
+      "source": "codemap",
+      "score": 1,
+      "text": "Weak codemap hit with one generic token."
+    },
+    {
+      "source": "speed-ledger",
+      "score": 9,
+      "text": "Strong speed ledger hit with many exact operational tokens."
+    }
+  ],
+  "queries": [
+    { "query": "MissionState acquire-zone lease", "expectedTop3": "codemap" },
+    { "query": "Tiered Retrieval Bus redacted hit@3", "expectedTop3": "rnd-spec" },
+    { "query": "scorecard gate mode", "expectedTop3": "speed-ledger" }
+  ],
+  "memoryLines": {
+    "vulcancode": "- 2026-06-28 | VulcanCode recall memory update | tools/recall_bus.ts | Operational recall memory update prevents design prose collisions while preserving redaction and scorecard verification. | vulcancode, recall-bus, memory, retrieval, no-regression",
+    "moemoney": "- 2026-06-24 | Moemoney recall memory update | moemoney-project.md | Design prose about world model memory update dynamics and recall-like ontology freshness. | moemoney, ontology, memory, design",
+    "fastcode": "- 2026-06-24 | fastcode fork foundation | FASTCODE_HANDOFF_2026-06-24.md | Fastcode source package and PATH shim added beside opencode. | fastcode, opencode, fork"
+  }
+}

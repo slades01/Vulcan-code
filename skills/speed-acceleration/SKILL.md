@@ -118,6 +118,10 @@ Promote a speed improvement into orchestrator/command/skill doctrine only when:
 
 Reject or rollback a speed rule when it increases wall-clock time, causes duplicate work, hides failures, or increases safety risk.
 
+## VulcanCode self-improvement exception
+
+For VulcanCode agent, command, skill, model-routing, permission, plugin, tool, or prompt changes, do not silently promote. Propose or apply only through `agent-evaluator`, `vulcan-maintainer`, or the primary orchestrator. Promotion requires: a selected benchmark or regression task, a scorecard row or explicit no-regression note, config validation, focused `vulcan debug agent <changed-agent-or-orchestrator>` checks when agents change, restart notice for runtime-loaded files, and a no-regression signal with model, verification tier, pass/fail, wall-clock when measured, and residual risk.
+
 ## Final Reporting
 
 For non-trivial tasks, include one compact speed line in the final response:

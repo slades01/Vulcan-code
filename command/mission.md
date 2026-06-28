@@ -21,6 +21,7 @@ Mission-mode contract:
    - Max iterations, default 5 repair iterations per concrete verification failure.
    - Stop conditions.
    - File ownership zones.
+   For long-horizon missions, create or update `.opencode/run/MISSION.md` when safe and in-scope. Treat it as the compact canonical continuation artifact across compaction/restart; do not store raw lane output or sensitive data there.
 4. Use `loop_guard` when available for any repeated repair/verification loop.
 5. Continue until one of these is true:
    - Acceptance criteria are met and verification passes.

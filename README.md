@@ -46,12 +46,46 @@ git clone https://github.com/slades01/Vulcan-code.git
 | `agent/` | 33 agent definitions — orchestrator, build-lead, implementation/verification/optimization lanes, TDD engineer, debugger, research/synthesis/planning leads, panels, etc. |
 | `command/` | 28 slash commands — `/ultra`, `/ultra-off`, `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more. |
 | `skills/` | 9 skills — ultra-default, bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable). |
-| `plugins/` | `trusted-autonomy.ts` (deny-by-default autonomy plugin) and `swarm-compaction.ts`. |
-| `tools/` | `loop_guard.ts` and `pace_guard.ts` — bounded loop / wall-clock pace contracts. |
-| `bench/` | Benchmark tasks, scorecard, and a Rung-2 spec gate. See `bench/README.md`. |
+| `plugins/` | `trusted-autonomy.ts` (deny-by-default autonomy plugin), `swarm-compaction.ts` (continuation-state preservation), and `metrics-tap.ts` (non-secret `.opencode/run/metrics.jsonl` event tail). |
+| `tools/` | Workflow helpers `agent_graph.ts`, `loop_guard.ts`, `pace_guard.ts`, `mission_state.ts` (one-writer file-zone leases + continuation state), `recall_bus.ts` (+ `recall_bus_lib.mjs`) tiered redacted retrieval, `synthesis.ts` (convergence helper); Code Memory `code_memory.ts` + `codemap_health.ts`; and `codemap/` (the deterministic local code-graph engine + CLIs). |
+| `bench/` | Benchmark tasks, scorecard, a Rung-2 spec gate, a `recall-golden.mjs` redaction/relevance golden test, and a parallelized deterministic local no-regression gate. See `bench/README.md`. |
 | `spec/` | Spec workflow docs. See `spec/README.md`. |
 | `config/opencode.example.jsonc` | A from-scratch, placeholder-only example config (no real keys). |
 | `examples/` | Quickstart and permissions walk-throughs. |
+
+## Code Memory (local code graph)
+
+VulcanCode ships a Cognee-like **local code-memory overlay**: a deterministic
+Extract → Cognify → Load (ECL) pipeline that scans a repo for code/docs, extracts
+files/symbols/edges into `.opencode/codemap/{nodes.jsonl,edges.jsonl,manifest.json}`,
+and lets later tasks do **structural recall** (a cheap graph query) instead of
+rebuilding cartography from scratch every time. Benchmarked recall is typically
+10×+ faster than a full regenerate on small/medium repos.
+
+- **Engine:** `tools/codemap/lib.mjs` — pure Node ESM, no hard external deps.
+  Exports `generateCodemap`, `recallCodemap`, `healthCodemap`, `benchCodemap`.
+  Cognify uses **optional real parsers** discovered safely at runtime: the JS/TS family
+  is parsed with a trusted engine-local TypeScript compiler API when available
+  (functions, classes, methods, accessors, interfaces, type aliases, enums,
+  namespaces, variable bindings, side-effect/re-export imports, call expressions,
+  real start/end spans), and Python can be parsed with stdlib `ast` only when
+  `VULCAN_CODE_MEMORY_PYTHON` points to an absolute trusted Python 3 binary.
+  Both degrade to the line-regex extractors if unavailable or on a parse failure, and
+  `manifest.parsers` records which path each file used.
+- **CLIs:** `tools/codemap/{generate,recall,health,bench}.mjs`
+  (`npm run codemap:generate|health|recall|bench`).
+- **Plugin tools:** `tools/code_memory.ts` (`code_memory`, op =
+  `generate|recall|health|bench`) and `tools/codemap_health.ts` (`codemap_health`).
+- **Safety:** credential-like paths are excluded from scanning; file content is
+  secret-scanned before any snippet/doc/signature is persisted, and suspected
+  secrets are redacted and never written. Data model, safety, and verification
+  are documented in `spec/codemap.md`.
+
+```bash
+npm run codemap:generate               # build the overlay into .opencode/codemap
+npm run codemap:health                 # ok | stale | missing | drift
+npm run codemap:recall                 # query="memory" by default; pass --query
+```
 
 ## Install / use
 
@@ -65,7 +99,7 @@ npm install -g github:slades01/Vulcan-code
 # or from a local clone:
 npm install -g .
 
-vulcan --version      # prints the selected opencode runtime version
+vulcan --version      # prints the VulcanCode version (e.g. "VulcanCode 1.0")
 ```
 
 This installs the `vulcan` command (a small Node launcher, `bin/vulcan.js`) plus
@@ -130,8 +164,15 @@ private host information are present.
   (see `SECURITY.md`).
 - Broader secret scan (`sk-…`, `AKIA…`, `ghp_…`, `Bearer …`, provider key assignments) → **0 hits**.
 - TypeScript: `tsc --noEmit` over `plugins/**` and `tools/**`.
+- Code Memory: `node tools/codemap/{generate,recall,health,bench}.mjs` over this
+  repo; overlay is deterministic (reproducible canonical digests) and secret-safe
+  (0 secret-flagged on this payload). See `spec/codemap.md`.
 - Config-health gate: `npm run config:health` (`vulcan --version && vulcan debug startup &&
   vulcan debug config && vulcan debug agent orchestrator`).
+- Package parity + fast bench gate: `npm run bench:recall` (recall-bus redaction/relevance
+  golden), `npm run bench:run` (parallelized deterministic local gate that also checks
+  helper-tool presence), and `npm run codemap:bench`. See
+  `spec/VULCANCODE_PACKAGE_PARITY_2026-06-28.md`.
 
 ## License
 

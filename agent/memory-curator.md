@@ -88,3 +88,9 @@ Maintain recall indexes when possible:
 - Add one compact line per durable note: `YYYY-MM-DD | topic | file | why it matters | tags`.
 - Never index secrets, credentials, billing details, private keys, browser profile data, or raw logs.
 - Recall should grep the index first, then read only the 1-3 most relevant referenced notes.
+
+Structured code memory (Code Memory overlay):
+
+- When code structure, file impact, call/import relationships, or "where is X defined/used" is relevant to a note or recall, prefer the precomputed code graph before broad cartography: run `codemap_health`, then `code_memory` op `recall` with a focused query against `<root>/.opencode/codemap`. If the overlay is `missing`/`stale`/`drift`, recommend regenerating (`code_memory` op `generate`) rather than re-scanning by hand.
+- Treat the overlay as derived/runtime output: never hand-edit `nodes.jsonl`/`edges.jsonl`, and never reconstruct or echo secret-flagged file contents (they are already redacted in the overlay).
+- Structural recall from the graph is typically 10x+ faster than rebuilding cartography; use it to keep the prime gate cheap.

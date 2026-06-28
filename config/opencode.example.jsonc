@@ -39,8 +39,39 @@
   // for sensitive paths. See SECURITY.md and examples/permissions.md.
   "permission": {
     "edit": { "*": "ask" },
-    "bash": { "*": "ask" }
+    "bash": { "*": "ask" },
+    // Local/non-network workflow + code-graph tools. Allow them when the plugins
+    // below are enabled. Code Memory writes the generated overlay into
+    // <root>/.opencode/codemap (secrets redacted, never persisted). loop_guard,
+    // pace_guard, synthesis, and agent_graph only render contracts/graphs;
+    // recall_bus does read-only redacted retrieval; mission_state maintains the
+    // non-secret mission run-state at <root>/.opencode/run/state.json.
+    "code_memory": "allow",
+    "codemap_health": "allow",
+    "agent_graph": "allow",
+    "loop_guard": "allow",
+    "pace_guard": "allow",
+    "synthesis": "allow",
+    "recall_bus": "allow",
+    "mission_state": "allow"
   },
+
+  // Optional plugin tools. Uncomment to register the local VulcanCode workflow
+  // and code-graph tools. Requires the plugin files under ./tools/. Add
+  // "./plugins/metrics-tap.ts" to collect a non-secret <root>/.opencode/run/metrics.jsonl
+  // event tail (used by loop_guard/pace_guard structured verdicts); it never
+  // stores secrets.
+  // "plugin": [
+  //   "./tools/agent_graph.ts",
+  //   "./tools/loop_guard.ts",
+  //   "./tools/pace_guard.ts",
+  //   "./tools/synthesis.ts",
+  //   "./tools/mission_state.ts",
+  //   "./tools/recall_bus.ts",
+  //   "./tools/code_memory.ts",
+  //   "./tools/codemap_health.ts",
+  //   "./plugins/metrics-tap.ts"
+  // ],
 
   // Optional MCP servers. Uncomment and configure as needed.
   // "mcp": {

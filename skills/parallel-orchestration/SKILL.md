@@ -52,6 +52,7 @@ Use this skill to run work as a coordinated swarm instead of a single linear pas
 
 - Do not launch multiple agents to do the same work.
 - Do not edit the same files from multiple lanes at once.
+- For long-horizon missions, back edit ownership with `.opencode/run/zones.json` when available: acquire a zone before dispatching an edit lane, block overlapping edit leases at synthesis barriers, and release after verification/handoff. Read-only lanes are exempt.
 - Prefer read-only agents for discovery and review.
 - Return synthesized conclusions, not a pile of separate reports.
 - Mix independent roles or model families for high-confidence decisions instead of duplicating the same prompt.

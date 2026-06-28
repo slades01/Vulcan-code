@@ -52,6 +52,8 @@ permission:
   bash:
     "*": ask
     "vulcan --version*": allow
+    "vulcan debug startup*": allow
+    "vulcan debug config*": ask
     "vulcan agent list*": allow
     "vulcan debug agent*": allow
     "git clean*": deny
@@ -81,9 +83,10 @@ Evaluation dimensions:
 
 Benchmark loop:
 
-- Use `~\.config\opencode\bench\` as the default benchmark root for VulcanCode agent/command/skill changes.
+- Use repo-relative `bench/` as the default benchmark root for public-package VulcanCode agent/command/skill changes, and `~/.config/opencode/bench/` only for private global setup runs.
 - Score proposed changes against `bench/tasks/*.md` when relevant and append summarized outcomes to `bench/scorecard.md`.
-- A change can be recommended for promotion only when it has a no-regression signal: pass/fail, wall-clock if measured, model used, verification tier, and residual risk.
+- A change can be recommended for promotion only when it has a no-regression signal: date, change, selected task, agent/model, gate mode, verification tier, pass/fail or pending, wall-clock/tokens if measured, and residual risk.
+- Promotion evidence must be a `gate_mode=executable` scorecard row, or a `manual-evidence` row whose verification signal names explicit T0/T1 commands. Prompt-only historical rows are provenance only and do not count for promotion.
 - If a benchmark is not runnable in the current environment, say why and mark the proposal `pending`, not `promoted`.
 - Do not edit files; propose the exact diff and the benchmark/scorecard row that should validate it.
 

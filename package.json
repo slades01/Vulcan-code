@@ -32,7 +32,9 @@
   ],
   "vulcan": {
     "runtime": "opencode",
-    "version": "0.0.0-dev-202606261805"
+    "version": "0.0.0-dev-202606261805",
+    "brand": "VulcanCode",
+    "displayVersion": "1.0"
   },
   "scripts": {
     "typecheck": "tsc --noEmit --pretty false",
@@ -42,7 +44,13 @@
     "config:orchestrator": "vulcan debug agent orchestrator",
     "config:health": "vulcan --version && vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator",
     "config:agents": "vulcan agent list",
-    "config:mcp": "vulcan mcp list"
+    "config:mcp": "vulcan mcp list",
+    "bench:run": "node bench/run.mjs",
+    "bench:recall": "node bench/recall-golden.mjs",
+    "codemap:generate": "node bench/codemap-smoke.mjs generate",
+    "codemap:health": "node bench/codemap-smoke.mjs health",
+    "codemap:recall": "node bench/codemap-smoke.mjs recall greet",
+    "codemap:bench": "node bench/codemap-smoke.mjs bench greet"
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.17.9",

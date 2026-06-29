@@ -3,7 +3,7 @@ description: Nested build lead for coordinating one safe implementation or TDD l
 mode: subagent
 color: success
 steps: 75
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   read:

@@ -1,7 +1,6 @@
 ---
 description: Model-diverse brainstorming panel seat using OpenCode Go DeepSeek V4 Pro for rigorous code reasoning and failure analysis.
 mode: subagent
-disable: true
 color: info
 steps: 80
 model: opencode-go/deepseek-v4-pro

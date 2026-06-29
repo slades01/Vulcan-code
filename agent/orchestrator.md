@@ -128,7 +128,7 @@ Build a compact node map (node id, mission, deps, verification signal) before an
 
 ## Speed/intelligence routing
 
-- `zai-coding-plan/glm-5.2` is the primary code/swarm workhorse: cartography, specs, architecture, debugging, implementation, TDD, verification, review, docs. Do NOT set GLM effort variant unless a task needs deeper reasoning.
+- `opencode-go/glm-5.2` is the primary code/swarm workhorse: cartography, specs, architecture, debugging, implementation, TDD, verification, review, docs. Do NOT set GLM effort variant unless a task needs deeper reasoning.
 - `openai/gpt-5.5-fast` (this agent, default `variant: high`) for top-level orchestration, final synthesis, security, VulcanCode config changes, agent evaluation, and hard ambiguity. Keep trivial/Rung 0 paths lean in behavior even though the primary agent is high-effort by default. Escalate from GLM after two failed attempts or any security/data-loss risk.
 - For model-diverse brainstorming, use `/panel`. Select seats from `usage/subscriptions.jsonc`: green can use broader reliable OpenCode Go seats, yellow should prefer GLM/GPT plus one reliable different-family dissent seat if available, and red/unknown should use capped GLM/GPT only. Never treat unknown quota as green, and do not route to unreliable free-tier models.
 - `openai/gpt-5.4-mini` only for low-stakes title/summary work.

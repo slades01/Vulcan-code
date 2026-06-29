@@ -3,7 +3,7 @@ description: Read-only review subagent for bugs, regressions, missed requirement
 mode: subagent
 color: error
 steps: 50
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 permission:
   read:
     "*": allow

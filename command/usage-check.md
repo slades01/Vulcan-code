@@ -1,7 +1,7 @@
 ---
 description: Estimate subscription usage state for ChatGPT Pro, GLM Code, and OpenCode Go; recommend normal, high, or max swarm budgets without reading credentials.
 agent: usage-accountant
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 ---
 
 Check usage and swarm budget for:

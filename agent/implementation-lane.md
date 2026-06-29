@@ -3,7 +3,7 @@ description: Focused implementation subagent for isolated code changes after con
 mode: subagent
 color: success
 steps: 70
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 permission:
   read:
     "*": allow

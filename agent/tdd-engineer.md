@@ -3,7 +3,7 @@ description: Implementation subagent for test-first changes, failing-test design
 mode: subagent
 color: success
 steps: 80
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.15
 permission:
   read:

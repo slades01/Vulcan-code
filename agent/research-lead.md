@@ -3,7 +3,7 @@ description: Nested research lead for parallel read-only cartography, documentat
 mode: subagent
 color: info
 steps: 65
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   read:

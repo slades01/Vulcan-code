@@ -3,7 +3,7 @@ description: Subagent for running focused validation, tests, builds, lint checks
 mode: subagent
 color: warning
 steps: 60
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 permission:
   read:
     "*": allow

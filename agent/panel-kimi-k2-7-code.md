@@ -1,7 +1,6 @@
 ---
 description: Model-diverse brainstorming panel seat using OpenCode Go Kimi K2.7 Code for coding-agent strategy and long-context review.
 mode: subagent
-disable: true
 color: warning
 steps: 80
 model: opencode-go/kimi-k2.7-code

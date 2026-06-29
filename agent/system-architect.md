@@ -3,7 +3,7 @@ description: Designs implementation architecture, API boundaries, migration stra
 mode: subagent
 color: primary
 steps: 60
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.2
 permission:
   read:

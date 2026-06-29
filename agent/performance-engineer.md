@@ -3,7 +3,7 @@ description: Read-only performance engineer for bottlenecks, algorithmic complex
 mode: subagent
 color: warning
 steps: 60
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   read:

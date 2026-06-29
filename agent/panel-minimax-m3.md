@@ -1,7 +1,6 @@
 ---
 description: Model-diverse brainstorming panel seat using OpenCode Go MiniMax M3 for broad creative architecture and alternative plans.
 mode: subagent
-disable: true
 color: accent
 steps: 80
 model: opencode-go/minimax-m3

@@ -3,7 +3,7 @@ description: Captures durable project memory, decisions, runbooks, agent handoff
 mode: subagent
 color: secondary
 steps: 50
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.15
 permission:
   read:

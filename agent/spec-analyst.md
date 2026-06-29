@@ -3,7 +3,7 @@ description: Converts vague goals into acceptance criteria, edge cases, invarian
 mode: subagent
 color: secondary
 steps: 45
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   read:

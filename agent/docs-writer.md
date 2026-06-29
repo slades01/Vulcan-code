@@ -3,7 +3,7 @@ description: Documentation subagent for README, docs, changelog, migration notes
 mode: subagent
 color: info
 steps: 60
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.25
 permission:
   read:

@@ -3,7 +3,7 @@ description: Nested verification lead for coordinating focused tests, review, se
 mode: subagent
 color: warning
 steps: 70
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.08
 permission:
   read:

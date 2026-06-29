@@ -3,7 +3,7 @@ description: Designs agent node maps, DAGs, dependencies, topology, lane prompts
 mode: subagent
 color: accent
 steps: 50
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.15
 permission:
   read:

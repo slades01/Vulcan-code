@@ -3,7 +3,7 @@ description: Edit-capable lane for performance and mathematics optimization agai
 mode: subagent
 color: success
 steps: 80
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   read:

@@ -11,10 +11,14 @@ skills, plugins, tools, benchmarks, and specs — sanitized of all local paths, 
 private infrastructure, and secrets. Clone it, copy the pieces you want into your own
 `~/.config/opencode`, and adapt.
 
-> Current VulcanCode package version: `0.0.0-dev-202606261805`, matching the
-> live local VulcanCode runtime this snapshot was taken from. The portable GitHub
-> package still launches the bundled `opencode-ai` runtime dependency unless you
-> override it with `VULCAN_RUNTIME`.
+> Built and tested as the `1.0.0-fast` release. The portable GitHub package still
+> launches the bundled `opencode-ai` runtime dependency unless you override it
+> with `VULCAN_RUNTIME`.
+>
+> Current VulcanCode package version: `0.0.0-dev-202606261805`, matching the live
+> local VulcanCode runtime this snapshot was taken from. `vulcan --version`
+> delegates to the bundled opencode runtime and prints the runtime version
+> (currently `1.17.9`).
 
 > **Compatibility note:** VulcanCode currently uses the [opencode](https://opencode.ai) config
 > schema (`https://opencode.ai/config.json`) and the `@opencode-ai/plugin` SDK under the hood,
@@ -32,6 +36,7 @@ private infrastructure, and secrets. Clone it, copy the pieces you want into you
 Grab the whole package as a single archive from this repo:
 
 - [`vulcan-0.0.0-dev-202606261805.zip`](./vulcan-0.0.0-dev-202606261805.zip) — sanitized snapshot of this version.
+- [`vulcan-1.0.0-fast.zip`](./vulcan-1.0.0-fast.zip) — sanitized snapshot of this release.
 
 Or clone:
 
@@ -41,17 +46,17 @@ git clone https://github.com/slades01/Vulcan-code.git
 
 ## What's included
 
-| Path | Contents |
-|---|---|
-| `agent/` | 33 agent definitions — orchestrator, build-lead, implementation/verification/optimization lanes, TDD engineer, debugger, research/synthesis/planning leads, panels, etc. |
-| `command/` | 28 slash commands — `/ultra`, `/ultra-off`, `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more. |
-| `skills/` | 9 skills — ultra-default, bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable). |
-| `plugins/` | `trusted-autonomy.ts` (deny-by-default autonomy plugin), `swarm-compaction.ts` (continuation-state preservation), and `metrics-tap.ts` (non-secret `.opencode/run/metrics.jsonl` event tail). |
-| `tools/` | Workflow helpers `agent_graph.ts`, `loop_guard.ts`, `pace_guard.ts`, `mission_state.ts` (one-writer file-zone leases + continuation state), `recall_bus.ts` (+ `recall_bus_lib.mjs`) tiered redacted retrieval, `synthesis.ts` (convergence helper); Code Memory `code_memory.ts` + `codemap_health.ts`; and `codemap/` (the deterministic local code-graph engine + CLIs). |
-| `bench/` | Benchmark tasks, scorecard, a Rung-2 spec gate, a `recall-golden.mjs` redaction/relevance golden test, and a parallelized deterministic local no-regression gate. See `bench/README.md`. |
-| `spec/` | Spec workflow docs. See `spec/README.md`. |
-| `config/opencode.example.jsonc` | A from-scratch, placeholder-only example config (no real keys). |
-| `examples/` | Quickstart and permissions walk-throughs. |
+| Path                            | Contents                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agent/`                        | 33 agent definitions — orchestrator, build-lead, implementation/verification/optimization lanes, TDD engineer, debugger, research/synthesis/planning leads, panels, etc.                                                                                                                                                                                                    |
+| `command/`                      | 28 slash commands — `/ultra`, `/ultra-off`, `/swarm`, `/loop`, `/panel`, `/mission`, `/max-swarm`, `/autofix`, `/config-check`, `/agent-map`, and more.                                                                                                                                                                                                                     |
+| `skills/`                       | 9 skills — ultra-default, bounded-agent-loops, parallel-orchestration, wave-orchestration, agent-graph-workflows, speed-acceleration, portfolio-orchestration, subscription-usage-management, laptop-research-workhorse (currently unavailable).                                                                                                                            |
+| `plugins/`                      | `trusted-autonomy.ts` (deny-by-default autonomy plugin), `swarm-compaction.ts` (continuation-state preservation), and `metrics-tap.ts` (non-secret `.opencode/run/metrics.jsonl` event tail).                                                                                                                                                                               |
+| `tools/`                        | Workflow helpers `agent_graph.ts`, `loop_guard.ts`, `pace_guard.ts`, `mission_state.ts` (one-writer file-zone leases + continuation state), `recall_bus.ts` (+ `recall_bus_lib.mjs`) tiered redacted retrieval, `synthesis.ts` (convergence helper); Code Memory `code_memory.ts` + `codemap_health.ts`; and `codemap/` (the deterministic local code-graph engine + CLIs). |
+| `bench/`                        | Benchmark tasks, scorecard, a Rung-2 spec gate, a `recall-golden.mjs` redaction/relevance golden test, and a parallelized deterministic local no-regression gate. See `bench/README.md`.                                                                                                                                                                                    |
+| `spec/`                         | Spec workflow docs. See `spec/README.md`.                                                                                                                                                                                                                                                                                                                                   |
+| `config/opencode.example.jsonc` | A from-scratch, placeholder-only example config (no real keys).                                                                                                                                                                                                                                                                                                             |
+| `examples/`                     | Quickstart and permissions walk-throughs.                                                                                                                                                                                                                                                                                                                                   |
 
 ## Code Memory (local code graph)
 
@@ -99,7 +104,7 @@ npm install -g github:slades01/Vulcan-code
 # or from a local clone:
 npm install -g .
 
-vulcan --version      # prints the VulcanCode version (e.g. "VulcanCode 1.0")
+vulcan --version      # prints the runtime version (e.g. "1.17.9") and delegates to the bundled opencode runtime
 ```
 
 This installs the `vulcan` command (a small Node launcher, `bin/vulcan.js`) plus
@@ -123,7 +128,19 @@ Then:
    provider keys via environment variables (e.g. `{env:OPENAI_API_KEY}`). **Never**
    commit a real `opencode.jsonc`.
 3. (Optional, for plugin/tool type-checking) `npm install && npm run typecheck`.
-4. Smoke-test: `vulcan debug startup && vulcan debug config && vulcan debug agent orchestrator`.
+4. Smoke-test config and live model routes:
+
+   ```bash
+   vulcan debug startup
+   vulcan debug config
+   vulcan debug agent orchestrator
+   vulcan debug agent implementation-lane
+   vulcan run --agent orchestrator "Smoke test only. Reply exactly: orchestrator callable."
+   vulcan run --model opencode-go/glm-5.2 "Smoke test only. Reply exactly: GLM worker callable."
+   ```
+
+   `debug startup` is only a shallow runtime check. The two `vulcan run` calls prove prompt
+   creation, database schema compatibility, provider authentication, and model availability.
 
 See [`examples/quickstart.md`](./examples/quickstart.md) and
 [`examples/permissions.md`](./examples/permissions.md).
@@ -136,6 +153,41 @@ delegated specialist lanes, bounded fan-out, adversarial review, and T0/T1 verif
 before final. Rung 0 stays lean and inline; high/max swarms still require genuine
 parallelism and usage gating. Use `/ultra` to make the default explicit for one request,
 or `/ultra-off` for a request-local conservative/solo override.
+
+## Local source vs live config
+
+Use this repo as the **local Vulcan source** and `~/.config/opencode` as the
+**live Vulcan config**:
+
+| Term         | Path                                                     | Meaning                                                                     |
+| ------------ | -------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Local source | this repo, e.g. `/Users/ethancurb/Documents/Vulcan-code` | Editable/versioned development copy. Safe to branch, experiment, and break. |
+| Live config  | `~/.config/opencode`                                     | Actual config loaded by `vulcan` from any project. Treat as production.     |
+
+Do **not** symlink live config to the repo unless you intentionally want branch
+switches and half-edits to affect every Vulcan session. The recommended workflow is
+controlled deploy:
+
+```bash
+# Check whether local source and live config match.
+scripts/compare-local-live-vulcan.sh
+
+# Preview what a deploy would sync. Timestamp-only rows may appear; the compare
+# script is the authoritative content drift check.
+scripts/deploy-local-to-live-vulcan.sh --dry-run
+
+# Deploy approved local source assets to live config, then verify live routes.
+scripts/deploy-local-to-live-vulcan.sh
+
+# Roll back the latest deploy backup if needed.
+scripts/rollback-live-vulcan.sh
+```
+
+The deploy script syncs only non-secret Vulcan assets: `agent/`, `command/`,
+`skills/`, `plugins/`, and `tools/`. It does not copy credentials, auth stores,
+usage ledgers, logs, memory, or `opencode.jsonc` provider secrets. Restart Vulcan
+after deploy or rollback because agent/command/skill/plugin files are loaded at
+session startup.
 
 ## Security posture
 
@@ -169,10 +221,6 @@ private host information are present.
   (0 secret-flagged on this payload). See `spec/codemap.md`.
 - Config-health gate: `npm run config:health` (`vulcan --version && vulcan debug startup &&
   vulcan debug config && vulcan debug agent orchestrator`).
-- Package parity + fast bench gate: `npm run bench:recall` (recall-bus redaction/relevance
-  golden), `npm run bench:run` (parallelized deterministic local gate that also checks
-  helper-tool presence), and `npm run codemap:bench`. See
-  `spec/VULCANCODE_PACKAGE_PARITY_2026-06-28.md`.
 
 ## License
 

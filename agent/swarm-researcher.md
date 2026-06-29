@@ -3,7 +3,7 @@ description: Read-only subagent for parallel codebase discovery, architecture ma
 mode: subagent
 color: info
 steps: 50
-model: zai-coding-plan/glm-5.2
+model: opencode-go/glm-5.2
 permission:
   read:
     "*": allow

@@ -13,19 +13,14 @@ Protocol:
 
 1. Panel seats stay read-only. After synthesis, the orchestrator may continue implementation only if the broader user mission already authorizes it.
 2. Use 3 seats by default; use 5 only when the problem has genuinely different dimensions.
-3. TEMPORARY QUOTA GUARD: OpenCode Go panel seats are disabled because the weekly OpenCode Go usage limit is exhausted. Do not call these disabled seats until re-enabled:
-   - `panel-deepseek-v4-pro` (`opencode-go/deepseek-v4-pro`): disabled.
-   - `panel-minimax-m3` (`opencode-go/minimax-m3`): disabled.
-   - `panel-qwen3-7-max` (`opencode-go/qwen3.7-max`): disabled.
-   - `panel-kimi-k2-7-code` (`opencode-go/kimi-k2.7-code`): disabled.
-4. While OpenCode Go is disabled, use reliable GLM/GPT seats only. Do not use unreliable free-tier models as panel seats.
-5. Seat selection defaults while OpenCode Go is disabled:
+3. Use reliable paid/subscription seats only. Do not use unreliable free-tier models as panel seats.
+4. Seat selection defaults:
    - Fast panel: GLM technical seat + GPT/orchestrator synthesis.
-   - Standard panel: GLM technical seat + GPT/orchestrator synthesis; add a reliable paid/subscription dissent seat only when available.
-   - Deep panel: GLM technical/repo seat + GLM verifier/reviewer seat + GPT/orchestrator synthesis; add reliable paid/subscription dissent seats only when available.
-6. Keep each seat independent: give each a narrow mission and ask for assumptions, recommendation, risks, and one falsifying test.
-7. Synthesize; do not concatenate. Return consensus, disagreements, decision criteria, recommended path, and what would change the recommendation.
-8. Do not launch more than 5 subagents for a single-repo panel. For small or obvious questions, answer inline instead.
+   - Standard panel: GLM technical seat + one model-diverse OpenCode Go dissent seat + GPT/orchestrator synthesis.
+   - Deep panel: GLM technical/repo seat + GLM verifier/reviewer seat + up to two model-diverse OpenCode Go seats + GPT/orchestrator synthesis.
+5. Keep each seat independent: give each a narrow mission and ask for assumptions, recommendation, risks, and one falsifying test.
+6. Synthesize; do not concatenate. Return consensus, disagreements, decision criteria, recommended path, and what would change the recommendation.
+7. Do not launch more than 5 subagents for a single-repo panel. For small or obvious questions, answer inline instead.
 
 Speed budget:
 

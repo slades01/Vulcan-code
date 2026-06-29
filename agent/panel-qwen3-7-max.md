@@ -1,7 +1,6 @@
 ---
 description: Model-diverse brainstorming panel seat using OpenCode Go Qwen 3.7 Max for strong coding, tooling, and systems analysis.
 mode: subagent
-disable: true
 color: success
 steps: 80
 model: opencode-go/qwen3.7-max
